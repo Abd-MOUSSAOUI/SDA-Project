@@ -14,7 +14,6 @@ $(PROG) : $(OBJS)
 
 $(OBJDIR)%.o:
 	$(CC) -c $(IFLAG) $(SRCDIR)%.c
-	# mv main.o $(OBJDIR)main.o
 
 clean:
 	rm -rf $(PROG)

@@ -1,15 +1,20 @@
 PROG = main
 CC = clang
+IFLAG = -Iinclude/
 SRCDIR = src/
 OBJDIR = obj/
-OBJS = $(OBJDIR)main.o
+SRCS = $(wildcard src/*.c)
+OBJS = $(patsubst src/*.c, obj/*.o, $(SRCS))
+
+# SRC = $(wildcard src/*.cpp)
+# OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 
 $(PROG) : $(OBJS)
-	$(CC) -o $(PROG) -g $(OBJS)
+	$(CC) -o $(PROG) $(IFLAG) $(OBJS)
 
-$(OBJDIR)main.o:
-	$(CC) -c $(SRCDIR)main.c
-	mv main.o $(OBJDIR)main.o
+$(OBJDIR)%.o:
+	$(CC) -c $(IFLAG) $(SRCDIR)%.c
+	# mv main.o $(OBJDIR)main.o
 
 clean:
-	rm -rf $(PROG) $(OBJS)
+	rm -rf $(PROG)

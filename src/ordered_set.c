@@ -51,10 +51,19 @@ void ordered_set_insert(ordered_set_t *set, index_t value)
     index_t insertion_index = 0;
     if (set->count != 0)
     {  
-
+        index_t i = 0, j = set->count - 1;
+        while(set->values[i] < value && set->values[j] > value)
+        {
+            if (set->values[(i + j) / 2] > value)
+                j = (i + j) / 2;
+            else if (set->values[(i + j) / 2] < value)
+                i = (i + j) / 2;
+            else 
+                fprintf(stderr, "Value %ld already exists at object %X\n", value, set);
+        }
     }
-    // Commit the insertion after getting the index
     ordered_set_grow_if_needed(set);
+    set->values[insertion_index] = value;
 }
 
 int ordered_set_contains(const ordered_set_t *set, index_t value)

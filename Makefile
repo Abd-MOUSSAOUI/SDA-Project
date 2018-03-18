@@ -6,9 +6,6 @@ OBJDIR = obj/
 SRCS = $(wildcard src/*.c)
 OBJS = $(patsubst src/*.c, obj/*.o, $(SRCS))
 
-# SRC = $(wildcard src/*.cpp)
-# OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
-
 $(PROG) : $(OBJS)
 	$(CC) -o $(PROG) $(IFLAG) $(OBJS)
 

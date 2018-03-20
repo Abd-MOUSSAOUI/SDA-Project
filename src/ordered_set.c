@@ -60,7 +60,7 @@ void ordered_set_insert(ordered_set_t *set, index_t value)
         while(i <= j)
         {
             index_t mid = (i + j) / 2;
-            ASSERT(set->values[mid] != value, "Value %ld already exists %s\n", value, "driss");
+            ASSERT(set->values[mid] != value, "Value %ld already exists %s\n", value);
             if (set->values[mid] > value)
                 j = mid - 1;
             else if (set->values[mid] < value)

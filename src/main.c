@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     ordered_set_print(set);
 
-    ordered_set_insert(set, 2446);
+    ordered_set_insert(set, 2445);
 
     ordered_set_print(set);
 

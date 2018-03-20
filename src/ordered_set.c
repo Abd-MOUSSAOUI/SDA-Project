@@ -60,7 +60,7 @@ void ordered_set_insert(ordered_set_t *set, index_t value)
         while(i <= j)
         {
             index_t mid = (i + j) / 2;
-            ASSERT(set->values[mid] != value, "Value %ld already exists %s\n", value);
+            ASSERT(set->values[mid] != value, "Value %ld already exists\n", value);
             if (set->values[mid] > value)
                 j = mid - 1;
             else if (set->values[mid] < value)
@@ -72,6 +72,7 @@ void ordered_set_insert(ordered_set_t *set, index_t value)
     _ordered_set_shift(set, insertion_index, 1);
     set->values[insertion_index] = value;
     set->count++;
+    set->_available--;
 }
 
 int ordered_set_contains(const ordered_set_t *set, index_t value)
@@ -96,7 +97,7 @@ void ordered_set_print(const ordered_set_t *set)
 }
 
 ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc)
-{   /* TODO: Implement this */
+{
     index_t index;
     ordered_set_t *st_set = (ordered_set_t *)sets[0], *intersection = ordered_set_create();
     for (index = 0; index < st_set->count; index++)
@@ -107,4 +108,18 @@ ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc)
                 ordered_set_insert(intersection, value);
     }
     return intersection;
+}
+
+ordered_set_t *ordered_set_copy(const ordered_set_t *set)
+{
+    ordered_set_t *copy = ordered_set_create();
+    index_t index;
+    for (index = 0; index < set->count; index++)
+    {
+        _ordered_set_grow_if_needed(copy);
+        copy->values[index] = set->values[index];
+        copy->count++;
+        copy->_available--;
+    }
+    return copy;
 }

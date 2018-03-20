@@ -7,24 +7,15 @@
 
 int main(int argc, char *argv[])
 {
-
-    index_t values[10] = {0, 2, 5, 6, 13, 66, 253, 2445, 12309, 143534};
-    index_t values2[5] = {0, 55, 66, 2445, 5123};
-    ordered_set_t *set = ordered_set_init(values, 10);
-    ordered_set_t *sset = ordered_set_init(values2, 5);
-
+    index_t pos[4] = {0, 1, 3};
+    ordered_set_t *set = ordered_set_init(pos, 3);
     ordered_set_print(set);
-    ordered_set_print(sset);
 
-    ordered_set_t *sets[2] = {set, sset};
+    bst_t *test = bst_create("Hello World", set, BST_CREATE_PTR);
 
-    ordered_set_t *inter = ordered_set_intersect(sets, 2);
+    bst_print(test);
 
-    ordered_set_print(inter);
-
-    ordered_set_destroy(&set);
-    ordered_set_destroy(&sset);
-    ordered_set_destroy(&inter);
+    bst_destroy(&test, BST_DESTROY_ALL);
 
     return EXIT_SUCCESS;
 }

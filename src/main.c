@@ -13,7 +13,9 @@ int main(int argc, char *argv[])
 
     ordered_set_print(set);
 
-    printf("This set contains 13 ? %s\n", ordered_set_contains(set, 13) ? "YES" : "NO");
+    ordered_set_insert(set, 2446);
+
+    ordered_set_print(set);
 
     ordered_set_destroy(&set);
 

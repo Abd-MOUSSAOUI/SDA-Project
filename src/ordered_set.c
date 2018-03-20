@@ -95,7 +95,16 @@ void ordered_set_print(const ordered_set_t *set)
     putchar('\n');
 }
 
-ordered_set_t *ordered_set_intersect(const ordered_set_t **sets, size_t setc)
+ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc)
 {   /* TODO: Implement this */
-    return NULL;
+    index_t index;
+    ordered_set_t *st_set = (ordered_set_t *)sets[0], *intersection = ordered_set_create();
+    for (index = 0; index < st_set->count; index++)
+    {
+        index_t set_index, value = st_set->values[index];
+        for (set_index = 1; set_index < setc; set_index++)
+            if (ordered_set_contains(sets[set_index], value))
+                ordered_set_insert(intersection, value);
+    }
+    return intersection;
 }

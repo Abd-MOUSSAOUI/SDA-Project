@@ -27,6 +27,6 @@ size_t ordered_set_get_count(const ordered_set_t *set);
 void ordered_set_insert(ordered_set_t *set, index_t value);
 int ordered_set_contains(const ordered_set_t *set, index_t value);
 void ordered_set_print(const ordered_set_t *set);
-ordered_set_t *ordered_set_intersect(const ordered_set_t **sets, size_t setc);
+ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc);
 
 #endif

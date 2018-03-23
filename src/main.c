@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     index_t pos[4] = {0, 1, 3};
-    ordered_set_t * _Nonnull set = ordered_set_init(pos, 3);
+    ordered_set_t *set = ordered_set_init(pos, 3);
 
     bst_t *test = bst_create("Hello", set, BST_CREATE_PTR);
     bst_t *world = bst_create("World", ordered_set_create(), BST_CREATE_PTR);

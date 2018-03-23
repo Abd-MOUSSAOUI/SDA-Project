@@ -77,9 +77,22 @@ void ordered_set_insert(ordered_set_t *set, index_t value)
 
 int ordered_set_contains(const ordered_set_t *set, index_t value)
 {
-    size_t index;
-    for (index = 0; index < set->count; index++)
-        if (value == set->values[index]) return 1;
+    index_t index = 0;
+    if (set->count != 0)
+    {  
+        index_t i = 0, j = set->count - 1;
+        while(i <= j)
+        {
+            index_t mid = (i + j) / 2;
+            if (set->values[mid] > value)
+                j = mid - 1;
+            else if (set->values[mid] < value)
+                i = mid + 1;
+            else 
+                return 1;
+        }
+        index = i;
+    }
     return 0;
 }
 

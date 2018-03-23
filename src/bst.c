@@ -36,12 +36,14 @@ void bst_destroy(bst_t **bst, int mode)
 
 size_t bst_get_words_count(const bst_t *bst)
 {
-    return 0;
+    if (bst == NULL) return 0;
+    return 1 + bst_get_words_count(bst->left_child) + bst_get_words_count(bst->right_child);
 }
 
 size_t bst_get_word_pos_count(const bst_t *bst)
 {
-    return 0;
+    if (bst == NULL) return 0;
+    return bst->positions->count + bst_get_word_pos_count(bst->left_child) + bst_get_word_pos_count(bst->right_child);
 }
 
 void bst_insert(bst_t *bst, const char *word, index_t pos)
@@ -60,10 +62,10 @@ void bst_print(const bst_t *bst)
     {
         printf("nil");
         return;
-    }
-    printf("[");
+    } 
+    printf("[ ");
     bst_print(bst->left_child);
     printf(" | %s | ", bst->word);
     bst_print(bst->right_child);
-    printf("]");
+    printf(" ]");
 }

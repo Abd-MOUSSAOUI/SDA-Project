@@ -26,6 +26,7 @@ bst_t *bst_create(const char *word, const ordered_set_t *positions, int mode)
     return bst;
 }
 
+// TODO: Fix the destroy mode
 void bst_destroy(bst_t **bst, int mode)
 {
     if (*bst == NULL) return;

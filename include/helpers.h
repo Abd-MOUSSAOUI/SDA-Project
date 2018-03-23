@@ -15,7 +15,6 @@
         exit(EXIT_FAILURE); \
     }
 
-#define _Nullable var __attribute__ ((var != NULL))
 
 void *salloc(void *ptr, size_t size);
 

@@ -26,13 +26,20 @@ bst_t *bst_create(const char *word, const ordered_set_t *positions, int mode)
     return bst;
 }
 
-// TODO: Fix the destroy mode
 void bst_destroy(bst_t **bst, int mode)
 {
     if (*bst == NULL) return;
     bst_destroy(&((*bst)->left_child), mode);
     bst_destroy(&((*bst)->right_child), mode);
-    ordered_set_destroy(&((*bst)->positions));
+    if (mode == BST_DESTROY_ALL)
+    {
+        ordered_set_destroy(&((*bst)->positions));
+        free((*bst)->word);
+    } else 
+    {
+        (*bst)->word = NULL;
+        (*bst)->positions = NULL;
+    }
 }
 
 size_t bst_get_words_count(const bst_t *bst)

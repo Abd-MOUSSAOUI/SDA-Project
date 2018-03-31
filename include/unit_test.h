@@ -7,6 +7,11 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include "helpers.h"
+#include "chrono.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef enum { UT_SUCCESS = 0, UT_FAIL } ut_status_t;
 
@@ -33,6 +38,7 @@ typedef struct ut_test_unit_s
     if ((__PTR) != NULL) \
     { \
         printf(__VA_ARGS__); \
+        putchar('\n'); \
         return UT_FAIL; \
     }
 
@@ -40,6 +46,7 @@ typedef struct ut_test_unit_s
     if ((__PTR) == NULL) \
     { \
         printf(__VA_ARGS__); \
+        putchar('\n'); \
         return UT_FAIL; \
     }
 
@@ -47,6 +54,7 @@ typedef struct ut_test_unit_s
     if (__CMP(__LHS, __RHS) != 0) \
     { \
         printf(__VA_ARGS__); \
+        putchar('\n'); \
         return UT_FAIL; \
     }
 
@@ -54,6 +62,7 @@ typedef struct ut_test_unit_s
     if (__CMP(__LHS, __RHS) == 0) \
     { \
         printf(__VA_ARGS__); \
+        putchar('\n'); \
         return UT_FAIL; \
     }
 
@@ -61,6 +70,7 @@ typedef struct ut_test_unit_s
     if (!(__COND)) \
     { \
         printf(__VA_ARGS__); \
+        putchar('\n'); \
         return UT_FAIL; \
     }
 
@@ -68,17 +78,26 @@ typedef struct ut_test_unit_s
     if (!(__COND)) \
     { \
         printf(__VA_ARGS__); \
+        putchar('\n'); \
         return UT_FAIL; \
     }
 
 #define ut_test_case_fulfill() return UT_SUCCESS
 
-#define ut_test_case_fail() return UT_FAIL
+#define ut_test_case_fail(__MSG, ...) \
+    printf((__MSG), __VA_ARGS__); \
+    putchar('\n'); \
+    return UT_FAIL
 
 ut_test_case_t ut_test_case_create(const char *desc, ut_test_block_t code);
-void ut_test_case_run(ut_test_case_t test_case);
+ut_status_t ut_test_case_run(ut_test_case_t test_case);
 
-ut_test_unit_t ut_test_unit_create(const char *desc, ut_test_case_t test_cases[], size_t count);
+ut_test_unit_t ut_test_unit_init(const char *desc, ut_test_case_t test_cases[], size_t count);
+ut_test_unit_t ut_test_unit_create(const char *desc);
 void ut_test_unit_run(ut_test_unit_t unit);
+void ut_test_unit_new_case(ut_test_unit_t *unit, const char *desc, ut_test_block_t code);
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __UNIT_TEST_H__ */

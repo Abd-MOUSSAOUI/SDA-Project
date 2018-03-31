@@ -8,11 +8,6 @@
 #include "ordered_set.h"
 #include "helpers.h"
 
-#define BST_CREATE_COPY 0
-#define BST_CREATE_PTR 1
-#define BST_DESTROY_PTRS 0
-#define BST_DESTROY_ALL 1
-
 typedef struct bst_s
 {
     char *word;
@@ -22,8 +17,8 @@ typedef struct bst_s
 } bst_t;
 
 bst_t *bst_init(void);
-bst_t *bst_create(const char *word, const ordered_set_t *positions, int mode);
-void bst_destroy(bst_t **bst, int mode);
+bst_t *bst_create(const char *word, const ordered_set_t *positions);
+void bst_destroy(bst_t **bst);
 size_t bst_get_words_count(const bst_t *bst);
 size_t bst_get_word_pos_count(const bst_t *bst);
 void bst_insert(bst_t *bst, const char *word, index_t pos);

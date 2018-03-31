@@ -25,7 +25,7 @@ ut_test_case_t ut_test_case_create(const char *desc, ut_test_block_t code)
     return test_case;
 }
 
-ut_test_unit_t ut_test_unit_create(const char *desc, ut_test_case_t test_cases[], size_t count)
+ut_test_unit_t ut_test_unit_init(const char *desc, ut_test_case_t test_cases[], size_t count)
 {
     ut_test_unit_t test_unit;
     test_unit.desc = desc;
@@ -34,7 +34,16 @@ ut_test_unit_t ut_test_unit_create(const char *desc, ut_test_case_t test_cases[]
     return test_unit;
 }
 
-void ut_test_case_run(ut_test_case_t test_case)
+ut_test_unit_t ut_test_unit_create(const char *desc)
+{
+    ut_test_unit_t test_unit;
+    test_unit.desc = desc;
+    test_unit.test_cases = NULL;
+    test_unit.test_cases_count = 0;
+    return test_unit;
+}
+
+ut_status_t ut_test_case_run(ut_test_case_t test_case)
 {
     ut_status_t status = test_case.test_code();
     if (status == UT_SUCCESS)
@@ -44,15 +53,28 @@ void ut_test_case_run(ut_test_case_t test_case)
     {
         printf(RED "\u2717\t%s\n" RESET, test_case.desc);
     }
+    return status;
 }
 
 void ut_test_unit_run(ut_test_unit_t unit)
 {
     printf("%s\n\n", unit.desc);
-    size_t i;
-    for (i = 0; i < unit.test_cases_count; i++)
-        ut_test_case_run(unit.test_cases[i]);
-    
-    printf("%ld tests executed\n", unit.test_cases_count);
+    size_t i, successful_tests = 0;
 
+    timeinterval_t begin = now();
+
+    for (i = 0; i < unit.test_cases_count; i++)
+        successful_tests += ut_test_case_run(unit.test_cases[i]) == UT_SUCCESS;
+
+    timeinterval_t end = now();
+    
+    putchar('\n');
+    printf("%ld / %ld test were successful! Time elapsed: %lld ms\n", unit.test_cases_count, successful_tests, time_elapsed(begin, end, MILLISECONDS));
+}
+
+void ut_test_unit_new_case(ut_test_unit_t *unit, const char *desc, ut_test_block_t code)
+{
+    ut_test_case_t new_case = ut_test_case_create(desc, code);
+    unit->test_cases = salloc(unit->test_cases, (++unit->test_cases_count) * sizeof(ut_test_case_t));
+    unit->test_cases[unit->test_cases_count - 1] = new_case;
 }

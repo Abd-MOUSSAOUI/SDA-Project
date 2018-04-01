@@ -1,12 +1,8 @@
 
-#include "analyzer.h"
+#include "string_analyzer.h"
 #include "helpers.h"
 
-#ifdef __clang__
-void str_split(const char *str, char delimiter, void(^map_function)(const char *, void *), void *arg)
-#else
-void str_split(const char *str, char delimiter, void(*map_function)(const char *, void *), void *arg)
-#endif
+void str_split(const char *str, char delimiter, void (*map_function)(const char *, void *), void *arg)
 {
     char *word_ptr = (char *)str;
     size_t char_count = 0;

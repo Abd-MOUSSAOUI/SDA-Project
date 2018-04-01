@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
+#include "print_tree.h"
 
 #define MAX_HEIGHT 1000
 int lprofile[MAX_HEIGHT];
@@ -9,25 +8,6 @@ int rprofile[MAX_HEIGHT];
 
 //adjust gap between left and right nodes
 int gap = 8;
-
-typedef long index_t;
-
-typedef struct ordered_set_s
-{
-    index_t *values;
-    size_t count;
-    size_t _available;
-} ordered_set_t;
-
-typedef struct bst_s
-{
-    char *word;
-    ordered_set_t *positions;
-    struct bst_s *left_child;
-    struct bst_s *right_child;
-} bst_t;
-
-
 
 bst_t *make_empty(bst_t *t)
 {
@@ -320,8 +300,8 @@ void print_ascii_tree(bst_t *t)
 }
 
 
-int main()
-{
+// int main()
+// {
 
-  return 0;
-}
+//   return 0;
+// }

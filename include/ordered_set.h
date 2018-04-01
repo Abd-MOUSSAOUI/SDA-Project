@@ -11,7 +11,7 @@
 
 #define BLOCK_SIZE 16
 
-typedef long index_t;
+typedef unsigned long index_t;
 
 typedef struct ordered_set_s
 {
@@ -29,5 +29,7 @@ int ordered_set_contains(const ordered_set_t *set, index_t value);
 void ordered_set_print(const ordered_set_t *set);
 ordered_set_t *ordered_set_copy(const ordered_set_t *set);
 ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc);
+int ordered_set_cmp(const ordered_set_t *lhs, const ordered_set_t *rhs);
+static inline int index_cmp(index_t lhs, index_t rhs) { return lhs - rhs; }
 
 #endif

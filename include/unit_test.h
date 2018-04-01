@@ -15,11 +15,7 @@ extern "C" {
 
 typedef enum { UT_SUCCESS = 0, UT_FAIL } ut_status_t;
 
-#ifdef __clang__
-typedef ut_status_t(^ut_test_block_t)(void); 
-#else 
 typedef ut_status_t(*ut_test_block_t)(void); 
-#endif
 
 typedef struct ut_test_case_s
 {

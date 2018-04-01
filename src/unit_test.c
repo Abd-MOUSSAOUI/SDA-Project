@@ -69,7 +69,7 @@ void ut_test_unit_run(ut_test_unit_t unit)
     timeinterval_t end = now();
     
     putchar('\n');
-    printf("%ld / %ld test were successful! Time elapsed: %lld ms\n", unit.test_cases_count, successful_tests, time_elapsed(begin, end, MILLISECONDS));
+    printf("%ld / %ld tests were successful! Time elapsed: %lld ms\n", unit.test_cases_count, successful_tests, time_elapsed(begin, end, MILLISECONDS));
 }
 
 void ut_test_unit_new_case(ut_test_unit_t *unit, const char *desc, ut_test_block_t code)

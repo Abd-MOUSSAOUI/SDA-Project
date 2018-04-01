@@ -136,3 +136,14 @@ ordered_set_t *ordered_set_copy(const ordered_set_t *set)
     }
     return copy;
 }
+
+int ordered_set_cmp(const ordered_set_t *lhs, const ordered_set_t *rhs)
+{
+    if (lhs->count != rhs->count) return 1;
+    index_t index;
+    for (index = 0; index < lhs->count; index++)
+        if (lhs->values[index] != rhs->values[index])
+            return 1;
+
+    return 0;
+}

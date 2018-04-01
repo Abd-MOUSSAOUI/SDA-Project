@@ -20,7 +20,7 @@ bool tree_isBalanced(bst_t *t)
 }
 
 
-int MAX (int X, int Y)
+int max (int X, int Y)
 {
   return ((X) > (Y)) ? (X) : (Y);
 }
@@ -29,5 +29,5 @@ int MAX (int X, int Y)
 int height(bst_t *t)
 {
    if(t == NULL) return 0;
-   return 1 + MAX(height(t->left_child), height(t->right_child));
+   return 1 + max(height(t->left_child), height(t->right_child));
 }

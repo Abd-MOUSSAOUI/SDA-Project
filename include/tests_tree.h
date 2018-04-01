@@ -10,7 +10,7 @@
 
 
 bool tree_isBalanced(bst_t *t);
-int MAX(int a, int b);
+int max(int a, int b);
 int height(bst_t *t);
 
 #endif

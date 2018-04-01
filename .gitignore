@@ -2,4 +2,5 @@
 obj/*
 main
 *.dSYM/*
-printtree
+tests
+.DS_Store

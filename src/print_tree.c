@@ -81,7 +81,7 @@ asciinode * build_ascii_tree_recursive(bst_t *t)
     node->right_child->parent_dir = 1;
   }
 
-  sprintf(node->label, "%s", t->word);
+  sprintf(node->label, "%s (%s)", t->word, ordered_set_to_string(t->positions));
   node->lablen = strlen(node->label);
 
   return node;

@@ -4,7 +4,7 @@
 
 ut_status_t build_bst_test_case()
 {
-    const char *example = "Hello World\nThis Might Hello Be The End\nOf The Hello World";
+    const char *example = "Hello World\nThis Might Hello Hello Be The End\nOf The Hello World";
 
     bst_t *built_tree = str_split(example, ' ');
 

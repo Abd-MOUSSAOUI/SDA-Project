@@ -6,7 +6,7 @@ bst_t *str_split(const char *str, char delimiter)
 {
     bst_t *tree = bst_init();
     char *word_ptr = (char *)str;
-    index_t char_count = 0, line_count = 0;
+    index_t char_count = 0, line_count = 1;
     
     while (*str)
     {

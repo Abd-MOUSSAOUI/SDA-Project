@@ -4,9 +4,11 @@
 
 ut_status_t build_bst_test_case()
 {
-    const char *example = "Hello World\nThis Might Be The End\nOf The World";
+    const char *example = "Hello World\nThis Might Hello Be The End\nOf The Hello World";
 
     bst_t *built_tree = str_split(example, ' ');
+
+    printf("%s\n", ordered_set_to_string(built_tree->positions));
 
     print_ascii_tree(built_tree);
 

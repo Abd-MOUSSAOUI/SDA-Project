@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
 {
 
     // run_bst_test_unit();
-    run_string_analyzer_test_unit();
-    // run_ordered_set_test_unit();
+    // run_string_analyzer_test_unit();
+    run_ordered_set_test_unit();
 
     return EXIT_SUCCESS;
 }

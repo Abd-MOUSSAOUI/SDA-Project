@@ -147,3 +147,33 @@ int ordered_set_cmp(const ordered_set_t *lhs, const ordered_set_t *rhs)
 
     return 0;
 }
+
+unsigned short int digits_count(index_t i)
+{
+    unsigned short int digits = 0;
+
+    while (i > 0)
+    {
+        i /= 10; 
+        digits++;
+    }
+    return digits;
+}
+
+char *ordered_set_to_string(const ordered_set_t *set)
+{
+    char *str = malloc(1024);
+    index_t index, i = 0;
+    for (index = 0; index < set->count; index++)
+    {
+        sprintf((str + i), "%lu", set->values[index]);
+        i += digits_count(set->values[index]);
+        if (index != set->count - 1 && index != 0) 
+        {
+            sprintf((str + i), "|");
+            i++;
+        }
+    }
+    str[i] = 0;
+    return str;
+}

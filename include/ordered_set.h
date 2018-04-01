@@ -30,6 +30,7 @@ void ordered_set_print(const ordered_set_t *set);
 ordered_set_t *ordered_set_copy(const ordered_set_t *set);
 ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc);
 int ordered_set_cmp(const ordered_set_t *lhs, const ordered_set_t *rhs);
+char *ordered_set_to_string(const ordered_set_t *set);
 static inline int index_cmp(index_t lhs, index_t rhs) { return lhs - rhs; }
 
 #endif

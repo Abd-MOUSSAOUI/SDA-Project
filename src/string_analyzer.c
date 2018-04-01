@@ -10,7 +10,8 @@ bst_t *str_split(const char *str, char delimiter)
     
     while (*str)
     {
-        if (*str == delimiter || *str == '\n')
+        if (strchr(IGNORED_CHARACTERS, *str)) { str++; continue; }
+        else if (*str == delimiter || *str == '\n')
         {
             char *word = salloc(NULL, (char_count + 1) * sizeof(char));
             strncpy(word, word_ptr, char_count);
@@ -24,6 +25,9 @@ bst_t *str_split(const char *str, char delimiter)
             char_count++;
         str++;
     }
-    bst_insert(tree, word_ptr, line_count);
+    char *word = salloc(NULL, (char_count + 1) * sizeof(char));
+    strncpy(word, word_ptr, char_count);
+    word[char_count] = '\0';
+    bst_insert(tree, word, line_count);
     return tree;
 }

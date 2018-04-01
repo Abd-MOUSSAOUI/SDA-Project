@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+#define IGNORED_CHARACTERS ".,?!/\\#"
+
 bst_t *str_split(const char *str, char delimiter);
 
 #ifdef __cplusplus

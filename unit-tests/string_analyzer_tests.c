@@ -8,7 +8,16 @@ ut_status_t build_bst_test_case()
 
     bst_t *built_tree = str_split(example, ' ');
 
-    printf("%s\n", ordered_set_to_string(built_tree->positions));
+    print_ascii_tree(built_tree);
+
+    ut_test_case_fulfill();
+}
+
+ut_status_t example_test_case()
+{
+    const char *example = "foo bar baz grault.\nqux foo bar corge.\ncorge waldo grault foo.";
+
+    bst_t *built_tree = str_split(example, ' ');
 
     print_ascii_tree(built_tree);
 
@@ -20,6 +29,7 @@ void run_string_analyzer_test_unit()
     ut_test_unit_t unit = ut_test_unit_create("String analyzer unit");
 
     ut_test_unit_new_case(&unit, "Build tree from string", build_bst_test_case);
+    ut_test_unit_new_case(&unit, "Build tree from string", example_test_case);
 
     ut_test_unit_run(unit);
 }

@@ -23,7 +23,7 @@ $(OBJDIR)%.o:
 .PHONY: test
 tests: $(OBJS) $(TESTOBJS)
 	$(CC) -o tests $(IFLAG) $(OBJS) $(TESTOBJS)
-	# @clear
+	@clear
 	./tests $(TEST_ARGS)
 
 $(TESTDIR)%.o:

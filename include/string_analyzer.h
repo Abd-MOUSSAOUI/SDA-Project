@@ -3,12 +3,13 @@
 #ifndef __STRING_ANALYZER_H__
 #define __STRING_ANALYZER_H__
 
+#include "bst.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void str_split(const char *str, char delimiter, void (*map_function)(const char *, void *), void *arg);
-void str_splits(const char *str, const char *delimiters, void (*map_function)(const char *, void *), void *arg);
+bst_t *str_split(const char *str, char delimiter);
 
 #ifdef __cplusplus
 }

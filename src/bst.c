@@ -59,7 +59,10 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
           ordered_set_insert(positions, pos);
           bst->left_child = bst_create(word, positions);
         }
-        else return bst_insert(bst->left_child, word, pos);
+        else
+        {
+            bst_insert(bst->left_child, word, pos);
+        }
     }
     if (strcmp(bst->word, word)<0)
     {
@@ -69,7 +72,8 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
         ordered_set_insert(positions, pos);
         bst->right_child = bst_create(word, positions);
       }
-      else return bst_insert(bst->right_child, word, pos);
+      else 
+        bst_insert(bst->right_child, word, pos);
     }
 
     if (strcmp(bst->word, word) == 0)

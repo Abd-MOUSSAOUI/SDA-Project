@@ -4,6 +4,7 @@
 #define __STRING_ANALYZER_TEST_H__
 
 #include "string_analyzer.h"
+#include "print_tree.h"
 #include "unit_test.h"
 
 #ifdef __cplusplus

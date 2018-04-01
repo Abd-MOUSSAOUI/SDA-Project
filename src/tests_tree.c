@@ -8,15 +8,15 @@ bool tree_isBalanced(bst_t *t)
    int lh;
    int rh;
 
-   if(t == NULL) return true;
+   if(t == NULL) return 1;
 
    lh = height(t->left_child);
    rh = height(t->right_child);
 
    if( abs(lh-rh) <= 1 && tree_isBalanced(t->left_child)
-                       && tree_isBalanced(t->right_child)) return true;
+                       && tree_isBalanced(t->right_child)) return 1;
 
-   return false;
+   return 0;
 }
 
 
@@ -26,8 +26,8 @@ int MAX (int X, int Y)
 }
 
 
-int height(struct node* node)
+int height(bst_t *t)
 {
-   if(node == NULL) return 0;
-   return 1 + max(height(node->left), height(node->right));
+   if(t == NULL) return 0;
+   return 1 + MAX(height(t->left_child), height(t->right_child));
 }

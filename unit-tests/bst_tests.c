@@ -2,7 +2,7 @@
 
 #include "bst_tests.h"
 
-ut_status_t insertion_test_case()
+ut_status_t bst_insertion_test_case()
 {
     bst_t *test_bst = bst_create("root", ordered_set_create());
 
@@ -20,7 +20,7 @@ void run_bst_test_unit()
 {
     ut_test_unit_t unit = ut_test_unit_create("Binary search tree tests");
 
-    ut_test_unit_new_case(&unit, "Insertion test", insertion_test_case);
+    ut_test_unit_new_case(&unit, "Insertion test", bst_insertion_test_case);
 
     ut_test_unit_run(unit);
 }

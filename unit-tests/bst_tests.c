@@ -9,7 +9,7 @@ ut_status_t insertion_test_case()
     test_bst->left_child = bst_create("left", ordered_set_create());
     test_bst->right_child = bst_create("right", ordered_set_create());
 
-    bst_insert(&test_bst, "foo", 1);
+    bst_insert(test_bst, "foo", 1);
 
     print_ascii_tree(test_bst);
 

@@ -43,9 +43,41 @@ size_t bst_get_word_pos_count(const bst_t *bst)
     return bst->positions->count + bst_get_word_pos_count(bst->left_child) + bst_get_word_pos_count(bst->right_child);
 }
 
-void bst_insert(bst_t *bst, const char *word, index_t pos)
+bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
 {
-    
+    if (bst == NULL)
+    {
+      ordered_set_t *positions = ordered_set_create();
+      ordered_set_insert(positions, pos);
+      return bst_create(word, positions);
+    }
+    if (strcmp(bst->word, word)>0)
+    {
+        if (bst->left_child == NULL)
+        {
+          ordered_set_t *positions = ordered_set_create();
+          ordered_set_insert(positions, pos);
+          bst->left_child = bst_create(word, positions);
+        }
+        else return bst_insert(bst->left_child, word, pos);
+    }
+    if (strcmp(bst->word, word)<0)
+    {
+      if (bst->right_child == NULL)
+      {
+        ordered_set_t *positions = ordered_set_create();
+        ordered_set_insert(positions, pos);
+        bst->right_child = bst_create(word, positions);
+      }
+      else return bst_insert(bst->right_child, word, pos);
+    }
+
+    if (strcmp(bst->word, word) == 0)
+    {
+      if (!ordered_set_contains(bst->positions, pos))
+        ordered_set_insert(bst->positions, pos);
+    }
+    return bst;
 }
 
 size_t *bst_find_occurence_index(const bst_t *bst, const char *word)
@@ -55,11 +87,11 @@ size_t *bst_find_occurence_index(const bst_t *bst, const char *word)
 
 void bst_print(const bst_t *bst)
 {
-    if (bst == NULL) 
+    if (bst == NULL)
     {
         printf("nil");
         return;
-    } 
+    }
     printf("[ ");
     bst_print(bst->left_child);
     printf(" | %s | ", bst->word);

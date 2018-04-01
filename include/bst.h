@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ordered_set.h"
 #include "helpers.h"
 
@@ -21,7 +22,7 @@ bst_t *bst_create(const char *word, const ordered_set_t *positions);
 void bst_destroy(bst_t **bst);
 size_t bst_get_words_count(const bst_t *bst);
 size_t bst_get_word_pos_count(const bst_t *bst);
-void bst_insert(bst_t *bst, const char *word, index_t pos);
+bst_t* bst_insert(bst_t *bst, const char *word, index_t pos);
 size_t *bst_find_occurence_index(const bst_t *bst, const char *word);
 
 void bst_print(const bst_t *bst);

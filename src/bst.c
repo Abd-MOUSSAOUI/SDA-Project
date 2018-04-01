@@ -80,21 +80,11 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
     return bst;
 }
 
-size_t *bst_find_occurence_index(const bst_t *bst, const char *word)
+ordered_set_t *bst_find_occurence_indexes(const bst_t *bst, const char *word)
 {
-    return NULL;
-}
+    ordered_set_t *occurences = ordered_set_create();
 
-void bst_print(const bst_t *bst)
-{
-    if (bst == NULL)
-    {
-        printf("nil");
-        return;
-    }
-    printf("[ ");
-    bst_print(bst->left_child);
-    printf(" | %s | ", bst->word);
-    bst_print(bst->right_child);
-    printf(" ]");
+    
+
+    return occurences;
 }

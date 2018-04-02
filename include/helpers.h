@@ -16,6 +16,5 @@
     }
 
 void *salloc(void *ptr, size_t size);
-int readchar(FILE *fstream);
 
 #endif

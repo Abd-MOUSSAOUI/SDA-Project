@@ -128,14 +128,27 @@ void bst_traverse(bst_t *bst, bst_traversal traversal, forerach_node process, vo
 
 void bst_fill_list(const bst_t *bst, void *arg)
 {
+    char ***list = (char ***)arg;
+    char **l = *list;
+    index_t size = 0;
+    while (l != NULL && *l != NULL)
+    {
+        l++;
+        size++;
+    }
     
+    (*list) = salloc((*list), (size + 2) * sizeof(char *));
+    (*list)[size] = bst->word;
+    (*list)[size + 1] = NULL;
+
 }
 
 char **bst_to_list(const bst_t *bst)
 {
+
     char **list = NULL;
 
-    
+    bst_traverse((bst_t *)bst, INORDER, bst_fill_list, &list);
 
     return list;
 }

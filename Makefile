@@ -19,7 +19,7 @@ $(OBJDIR)%.o:
 
 .PHONY: test
 tests: $(OBJS) $(TEST_OBJS)
-	$(shell $(CC) -o tests $(IFLAG) $(OBJS) $(TEST_OBJS) &> compiler_logs)
+	$(CC) -o tests -g $(IFLAG) $(OBJS) $(TEST_OBJS)
 	@./tests $(TEST_ARGS)
 	@rm tests
 

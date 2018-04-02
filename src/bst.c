@@ -88,7 +88,7 @@ ordered_set_t *bst_find_occurence_indexes(const bst_t *bst, const char *word)
 {
     ordered_set_t *occurences = ordered_set_create();
 
-    
+    // TODO: Implement me     
 
     return occurences;
 }
@@ -101,4 +101,41 @@ int bst_cmp(const bst_t *lhs, const bst_t *rhs)
                 bst_cmp(lhs->right_child, rhs->right_child) ;
     else if (!lhs && !rhs) return 0;
     else return 1;
+}
+
+void bst_traverse(bst_t *bst, bst_traversal traversal, forerach_node process, void *arg)
+{
+    if (bst == NULL) return;
+    switch (traversal)
+    {
+        case INORDER:
+            bst_traverse(bst->left_child, traversal, process, arg);
+            process(bst, arg);
+            bst_traverse(bst->right_child, traversal, process, arg);
+            break;
+        case PREORDER:
+            process(bst, arg);
+            bst_traverse(bst->left_child, traversal, process, arg);
+            bst_traverse(bst->right_child, traversal, process, arg);
+            break;
+        case POSTORDER:
+            bst_traverse(bst->left_child, traversal, process, arg);
+            bst_traverse(bst->right_child, traversal, process, arg);
+            process(bst, arg);
+            break;
+    }
+}
+
+void bst_fill_list(const bst_t *bst, void *arg)
+{
+    
+}
+
+char **bst_to_list(const bst_t *bst)
+{
+    char **list = NULL;
+
+    
+
+    return list;
 }

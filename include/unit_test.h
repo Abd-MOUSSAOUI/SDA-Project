@@ -47,7 +47,7 @@ typedef struct ut_test_unit_s
     }
 
 #define ut_assert_equal(__LHS, __RHS, __CMP, ...) \
-    if (__CMP(__LHS, __RHS) != 0) \
+    if (__CMP((__LHS), (__RHS)) != 0) \
     { \
         printf(__VA_ARGS__); \
         putchar('\n'); \
@@ -55,7 +55,7 @@ typedef struct ut_test_unit_s
     }
 
 #define ut_assert_not_equal(__LHS, __RHS, __CMP, ...) \
-    if (__CMP(__LHS, __RHS) == 0) \
+    if (__CMP((__LHS), (__RHS)) == 0) \
     { \
         printf(__VA_ARGS__); \
         putchar('\n'); \

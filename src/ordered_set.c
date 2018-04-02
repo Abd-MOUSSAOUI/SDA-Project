@@ -162,7 +162,7 @@ unsigned short int digits_count(index_t i)
 
 char *ordered_set_to_string(const ordered_set_t *set)
 {
-    char *str = malloc(1024);
+    char *str = malloc(ORDERED_SET_STR_MAX);
     index_t index, i = 0;
     for (index = 0; index < set->count; index++)
     {

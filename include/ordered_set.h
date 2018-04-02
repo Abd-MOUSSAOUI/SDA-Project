@@ -9,7 +9,12 @@
 #include <string.h>
 #include "helpers.h"
 
+#define ORDERED_SET_STR_MAX 1024
 #define BLOCK_SIZE 16
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef unsigned long index_t;
 
@@ -33,4 +38,7 @@ int ordered_set_cmp(const ordered_set_t *lhs, const ordered_set_t *rhs);
 char *ordered_set_to_string(const ordered_set_t *set);
 static inline int index_cmp(index_t lhs, index_t rhs) { return lhs - rhs; }
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __ORDERED_SET_H__ */

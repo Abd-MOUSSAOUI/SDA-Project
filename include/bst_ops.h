@@ -9,11 +9,11 @@
 #define bool int
 #define true 1
 #define false 0
+#define max(X,Y) (X) > (Y) ? (X) : (Y)
 
 
-bool tree_isBalanced(bst_t *t);
-int tree_getHeight(bst_t *t);
-int max(int a, int b);
+bool bst_is_balanced(bst_t *t);
+long bst_get_height(bst_t *t);
 
 
 #endif

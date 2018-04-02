@@ -3,6 +3,7 @@
 #include "bst_ops_tests.h"
 
 
+
 ut_status_t bst_is_balanced_test_case()
 {
 
@@ -22,7 +23,8 @@ ut_status_t bst_get_height_test_case()
 {
     FILE *lorem_ipsum = fopen("unit-tests/input/LoremIpsum.txt", "r");
     bst_t *lit = fstr_split(lorem_ipsum);
-    ut_assert_true(bst_get_height(lit) == 8, "bst height isn't correct");
+
+    ut_assert_true(bst_get_height(lit) == 11, "bst height don't work");
 
     ut_test_case_fulfill();
 }

@@ -27,7 +27,7 @@ void run_test_units(int argc, char *argv[])
             run_string_analyzer_test_unit();
         else if (strcmp(argv[index], BST_OPS_TEST) == 0)
             run_bst_ops_test_unit(); /* Run the proper test */
-        else 
+        else
         {
             fprintf(stderr, "Unreconized test unit %s\n", argv[index]);
             exit(EXIT_FAILURE);

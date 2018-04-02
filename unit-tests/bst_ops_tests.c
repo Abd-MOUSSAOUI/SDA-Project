@@ -2,19 +2,18 @@
 
 #include "bst_ops_tests.h"
 
-/*
-bool bst_is_balanced(bst_t *t);
-long bst_get_height(bst_t *t);
-*/
+// bool bst_is_balanced(bst_t *t);
+// int bst_get_height(bst_t *t);
+
 ut_status_t bst_is_balanced_test_case()
 {
 
     FILE *lorem_ipsum = fopen("unit-tests/input/LoremIpsum.txt", "r");
 
     bst_t *lit = fstr_split(lorem_ipsum);
-
-    printf("%ld\n", bst_get_height(lit));
-    ut_assert_true(bst_get_height(lit) == 8, "bst height don't work");
+    print_ascii_tree(lit);
+    printf("%d\n", bst_get_height(lit));
+    ut_assert_true(bst_get_height(lit) == 11, "bst height don't work");
 
     ut_test_case_fulfill();
 }

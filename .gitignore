@@ -4,4 +4,3 @@ main
 *.dSYM/*
 tests
 .DS_Store
-compiler_logs

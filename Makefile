@@ -27,4 +27,4 @@ $(TESTDIR)%.o:
 	$(CC) -c $(WFLAGS) $(TESTDIR)%.c
 
 clean:
-	rm -rf $(PROG) tests
+	rm -rf $(PROG) tests tests.dSYM

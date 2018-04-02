@@ -7,6 +7,7 @@
 #include "ordered_set_tests.h"
 #include "string_analyzer_tests.h"
 #include "bst_tests.h"
+#include "bst_ops_tests.h"
 
 #define BST_TEST "bst"
 #define ORDERED_SET_TEST "ordset"
@@ -25,7 +26,7 @@ void run_test_units(int argc, char *argv[])
         else if (strcmp(argv[index], ANALYZER_TEST) == 0)
             run_string_analyzer_test_unit();
         else if (strcmp(argv[index], BST_OPS_TEST) == 0)
-            run_bst_test_unit(); /* Run the proper test */
+            run_bst_ops_test_unit(); /* Run the proper test */
         else 
         {
             fprintf(stderr, "Unreconized test unit %s\n", argv[index]);

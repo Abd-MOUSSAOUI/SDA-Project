@@ -64,8 +64,8 @@ void run_bst_test_unit()
 {
     ut_test_unit_t unit = ut_test_unit_create("Binary search tree tests");
 
-    ut_test_unit_new_case(&unit, "Insertion test case", bst_insertion_test_case);
-    ut_test_unit_new_case(&unit, "Traversal test case", bst_traversal_test_case);
+    ut_test_unit_new_case(&unit, "Binary Search Tree insertion test case", bst_insertion_test_case);
+    ut_test_unit_new_case(&unit, "Binary Search Tree traversal test case", bst_traversal_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree to string test case", bst_to_string_test_case);
 
     ut_test_unit_run(unit);

@@ -17,7 +17,7 @@ extern "C" {
 #define max(X,Y) ((X) > (Y) ? (X) : (Y))
 
 bool bst_is_balanced(bst_t *t);
-long bst_get_height(bst_t *t);
+int bst_get_height(bst_t *t);
 void bst_rotate_left(bst_t *t);
 void bst_rotate_right(bst_t *t);
 void bst_drotate_left(bst_t *t);

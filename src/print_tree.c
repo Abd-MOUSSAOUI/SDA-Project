@@ -297,10 +297,3 @@ void print_ascii_tree(bst_t *t)
   }
   free_ascii_tree(proot);
 }
-
-
-// int main()
-// {
-
-//   return 0;
-// }

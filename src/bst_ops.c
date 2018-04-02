@@ -31,14 +31,32 @@ int bst_get_height(bst_t *t)
 }
 
 
-void bst_rotate_left(bst_t *t)
+bst_t bst_rotate_left(bst_t *t)
 {
+    if (t == NULL) return t;
 
+    bst_t *x = t->right_child;
+    bst_t *y = x->left_child;
+ 
+    // Perform rotation
+    x->left_child = t;
+    t->right_child = y;
+    
+    return x;
 }
 
-void bst_rotate_right(bst_t *t)
+bst_t bst_rotate_right(bst_t *t)
 {
+    if (t == NULL) return t;
 
+    bst_t *x = t->left_child;
+    bst_t *y = x->right_child;
+ 
+    // Perform rotation
+    x->right_child = t;
+    t->left_child = y;
+
+    return x;
 }
 
 void bst_drotate_left(bst_t *t)

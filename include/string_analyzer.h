@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#define DELIMITERS " .,?!/\\\"'\n"
+#define DELIMITERS " \n`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?"
 
 bst_t *str_split(const char *str);
 bst_t *fstr_split(FILE *fstream);

@@ -14,9 +14,6 @@ TEST_ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 $(eval $(TEST_ARGS):;@:)
 endif
 
-$(PROG): $(OBJS)
-	$(CC) -o $(PROG) $(IFLAG) $(WFLAGS) $(OBJS)
-
 $(OBJDIR)%.o:
 	$(CC) -c $(IFLAG) $(WFLAGS) $(SRCDIR)%.c
 
@@ -25,6 +22,7 @@ tests: $(OBJS) $(TESTOBJS)
 	$(CC) -o tests $(IFLAG) $(OBJS) $(TESTOBJS)
 	@clear
 	./tests $(TEST_ARGS)
+	rm tests
 
 $(TESTDIR)%.o:
 	$(CC) -c $(WFLAGS) $(TESTDIR)%.c

@@ -5,9 +5,8 @@
 int lprofile[MAX_HEIGHT];
 int rprofile[MAX_HEIGHT];
 #define INFINITY (1<<20)
-
-//adjust gap between left and right nodes
-int gap = 8;
+#define MAX_CHAR_PER_WORD 26 /* max characters that can be displayed on an ascii node */
+#define GAP 2 /* adjust gap between left and right nodes */
 
 bst_t *make_empty(bst_t *t)
 {
@@ -42,7 +41,7 @@ struct asciinode_struct
   int parent_dir;
 
   //max supported unit32 in dec, 10 digits max
-  char label[11];
+  char label[MAX_CHAR_PER_WORD];
 };
 
 
@@ -190,7 +189,7 @@ void compute_edge_lengths(asciinode *node)
 	  delta = 4;
 	  for (i=0; i<hmin; i++)
     {
-	    delta = MAX(delta, gap + 1 + rprofile[i] - lprofile[i]);
+	    delta = MAX(delta, GAP + 1 + rprofile[i] - lprofile[i]);
     }
 
     //If the node has two children of height 1, then we allow the

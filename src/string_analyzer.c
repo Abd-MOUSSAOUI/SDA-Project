@@ -2,32 +2,35 @@
 #include "string_analyzer.h"
 #include "helpers.h"
 
-bst_t *str_split(const char *str, char delimiter)
+bst_t *str_split(const char *str)
 {
     bst_t *tree = bst_init();
-    char *word_ptr = (char *)str;
-    index_t char_count = 0, line_count = 1;
-    
-    while (*str)
+    size_t line_index = 1;
+    char *text = salloc(NULL, strlen(str) + 1), *line = NULL, *word = NULL;
+    strncpy(text, str, strlen(str));
+    while ((line = strtok_r(text, "\n", &text)) != NULL)
     {
-        if (strchr(IGNORED_CHARACTERS, *str)) { str++; continue; }
-        else if (*str == delimiter || *str == '\n')
-        {
-            char *word = salloc(NULL, (char_count + 1) * sizeof(char));
-            strncpy(word, word_ptr, char_count);
-            word[char_count] = '\0';
-            tree = bst_insert(tree, word, line_count);
-            word_ptr = (char *)(str + 1);
-            char_count = 0;
-            if (*str == '\n') line_count++;
-        }
-        else 
-            char_count++;
-        str++;
+        while ((word = strtok_r(line, DELIMITERS, &line)) != NULL)
+            tree = bst_insert(tree, word, line_index);
+        line_index++;
     }
-    char *word = salloc(NULL, (char_count + 1) * sizeof(char));
-    strncpy(word, word_ptr, char_count);
-    word[char_count] = '\0';
-    bst_insert(tree, word, line_count);
+    return tree;
+}
+
+bst_t *fstr_split(FILE *fstream)
+{
+    bst_t *tree = bst_init();
+    char *line = NULL, *word = NULL;
+    size_t line_length = 0, line_index = 1;
+    while (getline(&line, &line_length, fstream) != -1)
+    {
+        word = strtok(line, DELIMITERS);
+        while (word != NULL)
+        {
+            tree = bst_insert(tree, word, line_index);
+            word = strtok(NULL, DELIMITERS);
+        }
+        line_index++;
+    }
     return tree;
 }

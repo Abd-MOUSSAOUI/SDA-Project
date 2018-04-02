@@ -9,9 +9,10 @@
 extern "C" {
 #endif
 
-#define IGNORED_CHARACTERS ".,?!/\\#"
+#define DELIMITERS " .,?!/\\\"'\n"
 
-bst_t *str_split(const char *str, char delimiter);
+bst_t *str_split(const char *str);
+bst_t *fstr_split(FILE *fstream);
 
 #ifdef __cplusplus
 }

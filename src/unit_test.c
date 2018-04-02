@@ -9,10 +9,10 @@ void ut_test_case(const char *desc, ut_test_block_t code)
     ut_status_t status = code();
     if (status == UT_SUCCESS)
     {
-        printf(GREEN "\u2713\t%s\n" RESET, desc);
+        printf("\033[32m\u2713\t%s\n\033[0m", desc);
     } else 
     {
-        printf(RED "\u2717\t%s\n" RESET, desc);
+        printf("\033[31m\u2717\t%s\n\033[0m", desc);
     }
     number_of_tests++;
 }
@@ -48,10 +48,10 @@ ut_status_t ut_test_case_run(ut_test_case_t test_case)
     ut_status_t status = test_case.test_code();
     if (status == UT_SUCCESS)
     {
-        printf(GREEN "\u2713\t%s\n" RESET, test_case.desc);
+        printf("\033[32m\n\u2713\t%s\n\n\033[0m", test_case.desc);
     } else 
     {
-        printf(RED "\u2717\t%s\n" RESET, test_case.desc);
+        printf("\033[31m\n\u2717\t%s\n\n\033[0m", test_case.desc);
     }
     return status;
 }

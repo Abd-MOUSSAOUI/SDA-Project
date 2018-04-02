@@ -92,3 +92,13 @@ ordered_set_t *bst_find_occurence_indexes(const bst_t *bst, const char *word)
 
     return occurences;
 }
+
+int bst_cmp(const bst_t *lhs, const bst_t *rhs)
+{
+    if (lhs && rhs) 
+        return  strcmp(lhs->word, rhs->word) && 
+                bst_cmp(lhs->left_child, rhs->left_child) && 
+                bst_cmp(lhs->right_child, rhs->right_child) ;
+    else if (!lhs && !rhs) return 0;
+    else return 1;
+}

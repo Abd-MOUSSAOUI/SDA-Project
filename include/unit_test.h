@@ -80,8 +80,8 @@ typedef struct ut_test_unit_s
 
 #define ut_test_case_fulfill() return UT_SUCCESS
 
-#define ut_test_case_fail(__MSG, ...) \
-    printf((__MSG), __VA_ARGS__); \
+#define ut_test_case_fail(__MSG) \
+    printf((__MSG)); \
     putchar('\n'); \
     return UT_FAIL
 

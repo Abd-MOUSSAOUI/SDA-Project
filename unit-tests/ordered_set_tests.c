@@ -33,7 +33,6 @@ void run_ordered_set_test_unit()
     ut_test_unit_t unit = ut_test_unit_create("Ordered set tests");
 
     ut_test_unit_new_case(&unit, "Initialization test", ordered_set_initialization_test_case);
-
     ut_test_unit_new_case(&unit, "Insertion test", ordered_set_insertion_test_case);
 
     ut_test_unit_run(unit);

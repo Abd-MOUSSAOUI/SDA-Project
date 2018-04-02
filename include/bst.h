@@ -24,9 +24,6 @@ size_t bst_get_words_count(const bst_t *bst);
 size_t bst_get_word_pos_count(const bst_t *bst);
 bst_t* bst_insert(bst_t *bst, const char *word, index_t pos);
 ordered_set_t *bst_find_occurence_indexes(const bst_t *bst, const char *word);
-
-/*
-• findCooccurrences qui permet de retrouver tous les indices de coocurrences de plusieurs mots.
-*/
+int bst_cmp(const bst_t *lhs, const bst_t *rhs);
 
 #endif

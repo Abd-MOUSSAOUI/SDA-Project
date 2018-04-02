@@ -71,7 +71,7 @@ typedef struct ut_test_unit_s
     }
 
 #define ut_assert_false(__COND, ...) \
-    if (!(__COND)) \
+    if ((__COND)) \
     { \
         printf(__VA_ARGS__); \
         putchar('\n'); \

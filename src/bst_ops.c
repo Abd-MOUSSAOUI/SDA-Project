@@ -31,7 +31,7 @@ int bst_get_height(bst_t *t)
 }
 
 
-bst_t bst_rotate_left(bst_t *t)
+bst_t *bst_rotate_left(bst_t *t)
 {
     if (t == NULL) return t;
 
@@ -45,7 +45,7 @@ bst_t bst_rotate_left(bst_t *t)
     return x;
 }
 
-bst_t bst_rotate_right(bst_t *t)
+bst_t *bst_rotate_right(bst_t *t)
 {
     if (t == NULL) return t;
 
@@ -59,12 +59,12 @@ bst_t bst_rotate_right(bst_t *t)
     return x;
 }
 
-void bst_drotate_left(bst_t *t)
+bst_t *bst_drotate_left(bst_t *t)
 {
 
 }
 
-void bst_drotate_right(bst_t *t)
+bst_t *bst_drotate_right(bst_t *t)
 {
     
 }

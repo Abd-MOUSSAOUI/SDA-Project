@@ -18,10 +18,10 @@ extern "C" {
 
 bool bst_is_balanced(bst_t *t);
 int bst_get_height(bst_t *t);
-bst_t bst_rotate_left(bst_t *t);
-bst_t bst_rotate_right(bst_t *t);
-void bst_drotate_left(bst_t *t);
-void bst_drotate_right(bst_t *t);
+bst_t *bst_rotate_left(bst_t *t);
+bst_t *bst_rotate_right(bst_t *t);
+bst_t *bst_drotate_left(bst_t *t);
+bst_t *bst_drotate_right(bst_t *t);
 
 
 #ifdef __cplusplus

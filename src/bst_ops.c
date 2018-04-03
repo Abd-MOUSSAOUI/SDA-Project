@@ -55,16 +55,16 @@ bst_t *bst_rotate_right(bst_t *t)
     // Perform rotation
     x->right_child = t;
     t->left_child = y;
-
+    
     return x;
 }
 
 bst_t *bst_drotate_left(bst_t *t)
 {
-
+    return NULL;
 }
 
 bst_t *bst_drotate_right(bst_t *t)
 {
-    
+    return NULL;
 }

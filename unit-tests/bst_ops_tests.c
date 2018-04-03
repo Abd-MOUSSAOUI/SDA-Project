@@ -10,11 +10,18 @@ ut_status_t bst_is_balanced_test_case()
     char *example = "foo qux baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
     bst_t *t = str_split(example);
     ut_assert_true(bst_is_balanced(t), "Tree is balanced dosen't work correctly");
+    print_ascii_tree(t);
+    printf("\n\n\n");
+    t = bst_rotate_right(t);
+    print_ascii_tree(t);
+    printf("\n\n\n");
+    t = bst_rotate_left(t);
+    print_ascii_tree(t);
 
     example = "foo grault corge bar.\nfoo qux baz bar.\ncorge foo grault waldo.";
     t = str_split(example);
     ut_assert_false(bst_is_balanced(t), "Tree is balanced dosen't work correctly");
-    
+
     ut_test_case_fulfill();
     
 }

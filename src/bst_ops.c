@@ -59,12 +59,37 @@ bst_t *bst_rotate_right(bst_t *t)
     return x;
 }
 
-bst_t *bst_drotate_left(bst_t *t)
+bst_t *bst_left_right_rotate(bst_t *t)
 {
-    return NULL;
+    if (t == NULL) return t;
+
+	bst_t *x = t;
+	bst_t *y = x->left_child;
+	bst_t *z = y->right_child;
+	
+    // Perform rotation
+	x->left_child = z->right_child;
+	y->right_child = z->left_child; 
+	z->left_child = y;
+	z->right_child = x;
+
+	return z;
 }
 
-bst_t *bst_drotate_right(bst_t *t)
+bst_t *bst_right_left_rotate(bst_t *t)
 {
-    return NULL;
+    if (t == NULL) return t;
+
+    bst_t *x = t;
+	bst_t *y = x->right_child;
+	bst_t *z = y->left_child;
+	
+    // Perform rotation
+	x->right_child = z->left_child;
+	y->left_child = z->right_child; 
+	z->right_child = y;
+	z->left_child = x;
+
+	return z;
+
 }

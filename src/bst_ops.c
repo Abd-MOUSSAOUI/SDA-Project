@@ -103,3 +103,38 @@ int bst_balance_factor(bst_t *t)
 
 	return bf ;
 }
+bst_t *bst_balance(bst_t *t)
+{
+    if ((t == NULL) || bst_is_balanced(t)) return t;
+
+	bst_t *tmp = NULL;
+
+	if(t->left_child)
+		t->left_child = bst_balance(t->left_child);
+	if(t->right_child) 
+		t->right_child = bst_balance(t->right_child);
+
+	int bf = bst_balance_factor(t->right_child);
+
+	if( bf >= 2 ) 
+    {
+		// Left	
+
+		if(bst_balance_factor(t->left_child) <= -1) 
+			tmp = bst_left_right_rotate(t);
+		else 
+			tmp = bst_rotate_left(t);
+
+	} 
+    else if( bf <= -2 ) 
+    {
+		// Right
+
+		if(bst_balance_factor(t->right_child) >= 1)
+			tmp = bst_right_left_rotate(t);
+		else 
+			tmp = bst_rotate_right(t);
+    }
+
+	return tmp;	
+}

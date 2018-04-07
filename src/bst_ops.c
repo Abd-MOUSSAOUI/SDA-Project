@@ -94,7 +94,12 @@ bst_t *bst_right_left_rotate(bst_t *t)
 
 }
 
-bst_t *bst_balance(bst_t *t)
+int bst_balance_factor(bst_t *t) 
 {
-    if (t == NULL) return t;
+	int bf = 0;
+
+	if(t->left_child) bf += bst_balance_factor(t->left_child);
+	if(t->right_child) bf -= bst_balance_factor(t->right_child);
+
+	return bf ;
 }

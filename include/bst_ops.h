@@ -23,6 +23,8 @@ bst_t *bst_rotate_right(bst_t *t);
 bst_t *bst_left_right_rotate(bst_t *t);
 bst_t *bst_right_left_rotate(bst_t *t);
 bst_t *bst_balance(bst_t *t);
+int bst_balance_factor(bst_t *t);
+
 
 #ifdef __cplusplus
 }

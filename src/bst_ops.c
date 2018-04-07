@@ -20,7 +20,6 @@ bool bst_is_balanced(bst_t *t)
 }
 
 
-
 int bst_get_height(bst_t *t)
 {
     int lh=0, rh=0;
@@ -28,6 +27,17 @@ int bst_get_height(bst_t *t)
     if(t->left_child != NULL) lh = bst_get_height(t->left_child);
     if(t->right_child != NULL) rh = bst_get_height(t->right_child);
     return 1 + max(lh, rh);
+}
+
+
+int bst_balance_factor(bst_t *t) 
+{
+	int bf = 0;
+
+	if(t->left_child) bf += bst_balance_factor(t->left_child);
+	if(t->right_child) bf -= bst_balance_factor(t->right_child);
+
+	return bf;
 }
 
 
@@ -94,15 +104,6 @@ bst_t *bst_right_left_rotate(bst_t *t)
 
 }
 
-int bst_balance_factor(bst_t *t) 
-{
-	int bf = 0;
-
-	if(t->left_child) bf += bst_balance_factor(t->left_child);
-	if(t->right_child) bf -= bst_balance_factor(t->right_child);
-
-	return bf ;
-}
 bst_t *bst_balance(bst_t *t)
 {
     if ((t == NULL) || bst_is_balanced(t)) return t;

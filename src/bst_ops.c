@@ -93,3 +93,8 @@ bst_t *bst_right_left_rotate(bst_t *t)
 	return z;
 
 }
+
+bst_t *bst_balance(bst_t *t)
+{
+    if (t == NULL) return t;
+}

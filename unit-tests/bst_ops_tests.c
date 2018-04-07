@@ -26,7 +26,6 @@ ut_status_t bst_get_height_test_case()
     bst_t *lit = fstr_split(lorem_ipsum);
     print_ascii_tree(lit);
     ut_assert_true(bst_get_height(lit) == 6, "bst height don't work");
-
     ut_test_case_fulfill();
 }
 

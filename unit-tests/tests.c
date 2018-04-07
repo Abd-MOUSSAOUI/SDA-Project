@@ -13,6 +13,7 @@
 #define ORDERED_SET_TEST "ordset"
 #define ANALYZER_TEST "analyzer"
 #define BST_OPS_TEST "bstops"
+#define ALL_TESTS "all"
 
 void run_test_units(int argc, char *argv[])
 {
@@ -26,7 +27,15 @@ void run_test_units(int argc, char *argv[])
         else if (strcmp(argv[index], ANALYZER_TEST) == 0)
             run_string_analyzer_test_unit();
         else if (strcmp(argv[index], BST_OPS_TEST) == 0)
-            run_bst_ops_test_unit(); /* Run the proper test */
+            run_bst_ops_test_unit();
+        else if (strcmp(argv[index], ALL_TESTS) == 0)
+        {
+            run_bst_test_unit();
+            run_ordered_set_test_unit();
+            run_string_analyzer_test_unit();
+            run_bst_ops_test_unit();
+            break;
+        }
         else
         {
             fprintf(stderr, "Unreconized test unit %s\n", argv[index]);

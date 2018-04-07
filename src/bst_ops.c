@@ -34,8 +34,8 @@ int bst_balance_factor(bst_t *t)
 {
 	int bf = 0;
 
-	if(t->left_child) bf += bst_balance_factor(t->left_child);
-	if(t->right_child) bf -= bst_balance_factor(t->right_child);
+	if(t->left_child) bf += bst_get_height(t->left_child);
+	if(t->right_child) bf -= bst_get_height(t->right_child);
 
 	return bf;
 }

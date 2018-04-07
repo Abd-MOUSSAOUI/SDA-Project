@@ -9,7 +9,7 @@
 #include "print_tree.h"
 #include "string_analyzer.h"
 
-#ifdef _cpluspluc
+#ifdef __cpluspluc
 extern "C" {
 #endif
 

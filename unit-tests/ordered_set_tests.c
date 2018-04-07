@@ -11,6 +11,7 @@ ut_status_t ordered_set_initialization_test_case()
     for (index = 0; index < 11; index++)
         ut_assert_equal(test_set->values[index], index * index, 
                         index_cmp, "%lu != %lu", test_set->values[index], index * index);
+    ordered_set_destroy(&test_set);
     ut_test_case_fulfill();
 }
 
@@ -22,8 +23,10 @@ ut_status_t ordered_set_insertion_test_case()
 
     index_t post_test_values[11] = {0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100};
     ordered_set_t *post_test_set = ordered_set_init(post_test_values, 11);
-    printf("\n\n%s\n\n", ordered_set_to_string(post_test_set));
     ut_assert_equal(test_set, post_test_set, ordered_set_cmp, "Insertion wasn't successful");
+
+    ordered_set_destroy(&test_set);
+    ordered_set_destroy(&post_test_set);
 
     ut_test_case_fulfill();
 }

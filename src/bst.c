@@ -84,7 +84,7 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
     return bst;
 }
 
-char* bst_find(bst_t *bst, char *word)
+char *bst_find(const bst_t *bst, const char *word)
 {
     if (bst == NULL) return NULL;
     else if (bst->word == word) return ordered_set_to_string(bst->positions);
@@ -96,12 +96,21 @@ char* bst_find(bst_t *bst, char *word)
     return NULL;
 }
 
-ordered_set_t *bst_find_occurence_indexes(const bst_t *bst, const char *word)
+char **bst_find_occurence_indexes(const bst_t *bst, const char **word)
 {
-    ordered_set_t *occurences = ordered_set_create();
-
-    // TODO: Implement me     
-
+    const char **word_to_search = word;
+    int i=0, j=0;
+    while (word_to_search != NULL)
+    {
+        i++;
+    }
+    char **occurences = salloc(occurences, (i + 2) * sizeof(char *));
+    while (j<i)
+    {
+        occurences[j] = bst_find(bst, word_to_search[j]);
+        j++;
+    }
+    occurences[j+1]=NULL;
     return occurences;
 }
 

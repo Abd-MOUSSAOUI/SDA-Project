@@ -86,14 +86,15 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
 
 char *bst_find(const bst_t *bst, const char *word)
 {
-    if (bst == NULL) return NULL;
-    else if (bst->word == word) return ordered_set_to_string(bst->positions);
+    char *occu;
+    if (bst == NULL) occu=NULL;
+    else if (bst->word == word) occu = ordered_set_to_string(bst->positions);
     else  
     {
         bst_find(bst->left_child, word);
         bst_find(bst->right_child, word);
     }
-    return NULL;
+    return occu;
 }
 
 char **bst_find_occurence_indexes(const bst_t *bst, const char **word)

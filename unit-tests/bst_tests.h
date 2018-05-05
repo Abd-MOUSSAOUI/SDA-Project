@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "unit_test.h"
 #include "bst.h"
+#include "string_analyzer.h"
 #include "print_tree.h"
 
 #ifdef _cpluspluc

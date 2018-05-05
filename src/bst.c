@@ -31,16 +31,31 @@ void bst_destroy(bst_t **bst)
     free((*bst)->word);
 }
 
-size_t bst_get_words_count(const bst_t *bst)
+size_t bst_get_number_string(const bst_t *bst)
 {
     if (bst == NULL) return 0;
-    return 1 + bst_get_words_count(bst->left_child) + bst_get_words_count(bst->right_child);
+    return 1 + bst_get_number_string(bst->left_child) 
+             + bst_get_number_string(bst->right_child);
 }
 
-size_t bst_get_word_pos_count(const bst_t *bst)
+size_t bst_get_total_number_string(const bst_t *bst)
 {
     if (bst == NULL) return 0;
-    return bst->positions->count + bst_get_word_pos_count(bst->left_child) + bst_get_word_pos_count(bst->right_child);
+    return bst->positions->count + bst_get_total_number_string(bst->left_child) 
+                                + bst_get_total_number_string(bst->right_child);
+}
+
+float _bst_get_total_depth(const bst_t *bst, float init_depth)
+{
+    if (bst == NULL)
+        return 0;
+    return init_depth + _bst_get_total_depth(bst->left_child, init_depth + 1)
+                      + _bst_get_total_depth(bst->right_child, init_depth + 1);
+}
+
+float bst_get_average_depth(const bst_t *bst)
+{
+    return _bst_get_total_depth(bst, 0) / bst_get_number_string(bst);
 }
 
 bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
@@ -86,30 +101,23 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
 
 char *bst_find(const bst_t *bst, const char *word)
 {
-    if (bst == NULL) return NULL;
-    else if (bst->word == word) return ordered_set_to_string(bst->positions);
-    else  
+    if (bst == NULL) 
+        return NULL;
+    else if (strcmp(bst->word, word) == 0) 
+        return ordered_set_to_string(bst->positions);
+    else
     {
-       return bst_find(bst->left_child, word);
-       return bst_find(bst->right_child, word);
+        char *found = bst_find(bst->left_child, word);
+        return found != NULL ? found : bst_find(bst->right_child, word);
     }
 }
 
-char **bst_find_occurence_indexes(const bst_t *bst, const char **word)
+char **bst_find_occurence_indexes(const bst_t *bst, const char **word, size_t count)
 {
-    const char **word_to_search = word;
-    int i=0, j=0;
-    while (word_to_search != NULL)
-    {
-        i++;
-    }
-    char **occurences = salloc(occurences, (i + 2) * sizeof(char *));
-    while (j<i)
-    {
-        occurences[j] = bst_find(bst, word_to_search[j]);
-        j++;
-    }
-    occurences[j+1]=NULL;
+    int j = 0;
+    char **occurences = salloc(NULL, (count) * sizeof(char *));
+    for (j = 0; j < count; j++)
+        occurences[j] = bst_find(bst, word[j]);
     return occurences;
 }
 

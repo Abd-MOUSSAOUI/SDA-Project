@@ -60,6 +60,26 @@ ut_status_t bst_to_list_test_case()
     ut_test_case_fulfill();
 }
 
+ut_status_t bst_find_test_case()
+{
+    char *example = "foo qux baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
+    bst_t *t = str_split(example);
+
+    #ifdef DEBUG
+    print_ascii_tree(t);
+    #endif
+
+    char *found_word = bst_find(t, "foo");
+
+    #ifdef DEBUG
+    printf("%s\n", found_word != NULL ? found_word : "NULL");
+    #endif
+
+    ut_assert_not_null(found_word, "foo can't be found");
+
+    ut_test_case_fulfill();
+}
+
 void run_bst_test_unit()
 {
     ut_test_unit_t unit = ut_test_unit_create("Binary search tree tests");
@@ -67,6 +87,7 @@ void run_bst_test_unit()
     ut_test_unit_new_case(&unit, "Binary Search Tree insertion test case", bst_insertion_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree traversal test case", bst_traversal_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree to string test case", bst_to_list_test_case);
+    ut_test_unit_new_case(&unit, "Binary Search Tree find test case", bst_find_test_case);
 
     ut_test_unit_run(unit);
 }

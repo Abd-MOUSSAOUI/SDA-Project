@@ -10,6 +10,11 @@ ut_status_t bst_insertion_test_case()
     bst_insert(test_bst, "foo", 1);
     bst_insert(test_bst, "hello", 2);
 
+    #ifdef DEBUG
+    printf("• Testing tree: \n");
+    print_ascii_tree(test_bst);
+    #endif
+
     ut_assert_equal(test_bst->word, "root", strcmp);
     ut_assert_equal(test_bst->left_child->word, "foo", strcmp);
     ut_assert_equal(test_bst->right_child->word, "world", strcmp);
@@ -35,7 +40,16 @@ ut_status_t bst_traversal_test_case()
     bst_insert(test_bst, "foo", 1);
     bst_insert(test_bst, "hello", 2);
 
+    #ifdef DEBUG
+    printf("• Testing tree: \n");
+    print_ascii_tree(test_bst);
+    #endif
+
     bst_traverse(test_bst, PREORDER, traverse_example, &ind);
+
+    #ifdef DEBUG
+    printf("• Number of nodes returned by the traversal: %lu \n", ind);
+    #endif
 
     ut_assert_true(ind == 4);
 
@@ -56,8 +70,20 @@ ut_status_t bst_to_list_test_case()
     char *ex[] = {"foo", "hello", "root", "world"};
     index_t index = 0;
 
+    #ifdef DEBUG
+    printf("• Testing tree: \n");
+    print_ascii_tree(test_bst);
+    printf("• Returned list of nodes: \n");
+    #endif
+
     while (*list != NULL)
+    {
+        #ifdef DEBUG
+        printf("%s, ", *list);
+        #endif
         ut_assert_equal(*(list++), ex[index++], strcmp);
+    }
+    putchar('\n');
 
     bst_destroy(&test_bst);
 
@@ -70,7 +96,7 @@ ut_status_t bst_find_test_case()
     bst_t *t = str_split(example);
 
     #ifdef DEBUG
-    printf("Testing tree: \n");
+    printf("• Testing tree: \n");
     print_ascii_tree(t);
     putchar('\n');
     #endif
@@ -78,7 +104,7 @@ ut_status_t bst_find_test_case()
     char *found_word = bst_find(t, "foo");
 
     #ifdef DEBUG
-    printf("Occurences of the word 'foo': \n");
+    printf("• Occurences of the word 'foo': \n");
     printf("%s\n", found_word != NULL ? found_word : "NULL");
     putchar('\n');
     #endif
@@ -86,7 +112,7 @@ ut_status_t bst_find_test_case()
     char *not_found_word = bst_find(t, "abdou");
 
     #ifdef DEBUG
-    printf("Occurences of the word 'abdou': \n");
+    printf("• Occurences of the word 'abdou': \n");
     printf("%s\n", not_found_word != NULL ? not_found_word : "NULL");
     putchar('\n');
     #endif
@@ -105,7 +131,7 @@ ut_status_t bst_find_occurences_test_case()
     bst_t *t = str_split(example);
 
     #ifdef DEBUG
-    printf("Testing tree: \n");
+    printf("• Testing tree: \n");
     print_ascii_tree(t);
     putchar('\n');
     #endif
@@ -114,6 +140,7 @@ ut_status_t bst_find_occurences_test_case()
     char **occurences = bst_find_occurence_indexes(t, words, 4);
 
     #ifdef DEBUG
+    printf("• Returned positions for some examples of words:\n");
     printf("foo: %s\ngrault: %s\nbar: %s\nnon-exsitant: NULL", occurences[0], 
                                 occurences[1], occurences[2]);
     #endif
@@ -135,7 +162,7 @@ ut_status_t get_number_string_test_case()
     bst_t *t = fstr_split(hello_world);
 
     #ifdef DEBUG
-    printf("Testing tree: \n");
+    printf("• Testing tree: \n");
     print_ascii_tree(t);
     putchar('\n');
     #endif
@@ -143,7 +170,7 @@ ut_status_t get_number_string_test_case()
     ut_assert_true(bst_get_number_string(t) == 8);
 
     #ifdef DEBUG
-    printf("number of words without repetition is: %zu\n", bst_get_number_string(t));
+    printf("• number of words without repetition is: %zu\n", bst_get_number_string(t));
     putchar('\n');
     #endif
 
@@ -159,7 +186,7 @@ ut_status_t get_total_number_string_test_case()
     bst_t *t = fstr_split(hello_world);
 
     #ifdef DEBUG
-    printf("Testing tree: \n");
+    printf("• Testing tree: \n");
     print_ascii_tree(t);
     putchar('\n');
     #endif
@@ -167,7 +194,7 @@ ut_status_t get_total_number_string_test_case()
     ut_assert_true(bst_get_total_number_string(t) == 13);
 
     #ifdef DEBUG
-    printf("number of words is: %zu\n", bst_get_total_number_string(t));
+    printf("• number of words is: %zu\n", bst_get_total_number_string(t));
     putchar('\n');
     #endif
 
@@ -179,16 +206,19 @@ ut_status_t get_total_number_string_test_case()
 
 ut_status_t bst_get_average_depth_test_case()
 {
-    char *example = "foo qux baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
+    const char *example = "foo qux baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
     bst_t *t = str_split(example);
 
+    float average_depth = bst_get_average_depth(t);
+
     #ifdef DEBUG
-    printf("Testing tree: \n");
+    printf("• Testing tree: \n");
     print_ascii_tree(t);
     putchar('\n');
+    printf("• average depth: %f\n", average_depth);
     #endif
 
-    printf("average depth: %f\n", bst_get_average_depth(t));
+    ut_assert_true(average_depth > 1.624 && average_depth < 1.626);
 
     bst_destroy(&t);
 

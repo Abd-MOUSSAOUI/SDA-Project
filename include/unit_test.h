@@ -30,53 +30,23 @@ typedef struct ut_test_unit_s
     size_t test_cases_count;
 } ut_test_unit_t;
 
-#define ut_assert_null(__PTR, ...) \
-    if ((__PTR) != NULL) \
-    { \
-        printf(__VA_ARGS__); \
-        putchar('\n'); \
-        return UT_FAIL; \
-    }
+#define ut_assert_null(__PTR) \
+    if ((__PTR) != NULL) return UT_FAIL
 
-#define ut_assert_not_null(__PTR, ...) \
-    if ((__PTR) == NULL) \
-    { \
-        printf(__VA_ARGS__); \
-        putchar('\n'); \
-        return UT_FAIL; \
-    }
+#define ut_assert_not_null(__PTR) \
+    if ((__PTR) == NULL) return UT_FAIL
 
-#define ut_assert_equal(__LHS, __RHS, __CMP, ...) \
-    if (__CMP((__LHS), (__RHS)) != 0) \
-    { \
-        printf(__VA_ARGS__); \
-        putchar('\n'); \
-        return UT_FAIL; \
-    }
+#define ut_assert_equal(__LHS, __RHS, __CMP) \
+    if (__CMP((__LHS), (__RHS)) != 0) return UT_FAIL
 
-#define ut_assert_not_equal(__LHS, __RHS, __CMP, ...) \
-    if (__CMP((__LHS), (__RHS)) == 0) \
-    { \
-        printf(__VA_ARGS__); \
-        putchar('\n'); \
-        return UT_FAIL; \
-    }
+#define ut_assert_not_equal(__LHS, __RHS, __CMP) \
+    if (__CMP((__LHS), (__RHS)) == 0) return UT_FAIL
 
-#define ut_assert_true(__COND, ...) \
-    if (!(__COND)) \
-    { \
-        printf(__VA_ARGS__); \
-        putchar('\n'); \
-        return UT_FAIL; \
-    }
+#define ut_assert_true(__COND) \
+    if (!(__COND)) return UT_FAIL
 
-#define ut_assert_false(__COND, ...) \
-    if ((__COND)) \
-    { \
-        printf(__VA_ARGS__); \
-        putchar('\n'); \
-        return UT_FAIL; \
-    }
+#define ut_assert_false(__COND) \
+    if ((__COND)) return UT_FAIL
 
 #define ut_test_case_fulfill() return UT_SUCCESS
 

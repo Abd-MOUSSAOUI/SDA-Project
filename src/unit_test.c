@@ -47,18 +47,15 @@ ut_status_t ut_test_case_run(ut_test_case_t test_case)
 {
     ut_status_t status = test_case.test_code();
     if (status == UT_SUCCESS)
-    {
-        printf("\033[32m\n\u2713\t%s\n\n\033[0m", test_case.desc);
-    } else 
-    {
-        printf("\033[31m\n\u2717\t%s\n\n\033[0m", test_case.desc);
-    }
+        printf("\033[32m\n\u2713  %s\n\n\033[0m", test_case.desc);
+    else
+        printf("\033[31m\n\u2717  %s\n\n\033[0m", test_case.desc);
     return status;
 }
 
 void ut_test_unit_run(ut_test_unit_t unit)
 {
-    printf("%s\n", unit.desc);
+    printf("\033[34m\t%s\033[0m\n\n", unit.desc);
     size_t i, successful_tests = 0;
 
     timeinterval_t begin = now();
@@ -69,7 +66,8 @@ void ut_test_unit_run(ut_test_unit_t unit)
     timeinterval_t end = now();
     
     putchar('\n');
-    printf("%ld / %ld tests were successful! Time elapsed: %lld ms\n\n", unit.test_cases_count, successful_tests, time_elapsed(begin, end, MILLISECONDS));
+    printf("\033[34m\t%ld / %ld tests were successful! Time elapsed: %lld ms\033[0m\n\n", 
+           unit.test_cases_count, successful_tests, time_elapsed(begin, end, MILLISECONDS));
 }
 
 void ut_test_unit_new_case(ut_test_unit_t *unit, const char *desc, ut_test_block_t code)

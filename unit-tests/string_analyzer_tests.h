@@ -4,6 +4,7 @@
 #define __STRING_ANALYZER_TEST_H__
 
 #include "string_analyzer.h"
+#include "bst_ops.h"
 #include "print_tree.h"
 #include "unit_test.h"
 

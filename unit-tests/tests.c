@@ -31,8 +31,11 @@ void run_test_units(int argc, char *argv[])
         else if (strcmp(argv[index], ALL_TESTS) == 0)
         {
             run_bst_test_unit();
+            printf("\033[34m\t-----------------------------------------------\033[0m\n\n");
             run_ordered_set_test_unit();
+            printf("\033[34m\t-----------------------------------------------\033[0m\n\n");
             run_string_analyzer_test_unit();
+            printf("\033[34m\t-----------------------------------------------\033[0m\n\n");
             run_bst_ops_test_unit();
             break;
         }

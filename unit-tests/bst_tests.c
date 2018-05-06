@@ -10,10 +10,12 @@ ut_status_t bst_insertion_test_case()
     bst_insert(test_bst, "foo", 1);
     bst_insert(test_bst, "hello", 2);
 
-    ut_assert_equal(test_bst->word, "root", strcmp, "root word is not correct");
-    ut_assert_equal(test_bst->left_child->word, "foo", strcmp, "left child word is not correct");
-    ut_assert_equal(test_bst->right_child->word, "world", strcmp, "right word is not correct");
-    ut_assert_equal(test_bst->left_child->right_child->word, "hello", strcmp, "left's right word is not correct");
+    ut_assert_equal(test_bst->word, "root", strcmp);
+    ut_assert_equal(test_bst->left_child->word, "foo", strcmp);
+    ut_assert_equal(test_bst->right_child->word, "world", strcmp);
+    ut_assert_equal(test_bst->left_child->right_child->word, "hello", strcmp);
+
+    bst_destroy(&test_bst);
 
     ut_test_case_fulfill();
 }
@@ -35,7 +37,10 @@ ut_status_t bst_traversal_test_case()
 
     bst_traverse(test_bst, PREORDER, traverse_example, &ind);
 
-    ut_assert_true(ind == 4, "tree wasn't correctly traversed");
+    ut_assert_true(ind == 4);
+
+    bst_destroy(&test_bst);
+
     ut_test_case_fulfill();
 }
 
@@ -52,10 +57,9 @@ ut_status_t bst_to_list_test_case()
     index_t index = 0;
 
     while (*list != NULL)
-    {
-        ut_assert_equal(*list, ex[index++], strcmp, "%s != %s", *list, *ex);
-        list++;
-    }
+        ut_assert_equal(*(list++), ex[index++], strcmp);
+
+    bst_destroy(&test_bst);
 
     ut_test_case_fulfill();
 }
@@ -87,8 +91,10 @@ ut_status_t bst_find_test_case()
     putchar('\n');
     #endif
 
-    ut_assert_not_null(found_word, "foo can't be found");
-    ut_assert_null(not_found_word, "abdou shouldn't exist");
+    ut_assert_not_null(found_word);
+    ut_assert_null(not_found_word);
+
+    bst_destroy(&t);
 
     ut_test_case_fulfill();
 }
@@ -112,10 +118,12 @@ ut_status_t bst_find_occurences_test_case()
                                 occurences[1], occurences[2]);
     #endif
 
-    ut_assert_equal(occurences[0], "1|2|3", strcmp, "");
-    ut_assert_equal(occurences[1], "2|3", strcmp, "");
-    ut_assert_equal(occurences[2], "1|2", strcmp, "");
-    ut_assert_null(occurences[3], "");
+    ut_assert_equal(occurences[0], "1|2|3", strcmp);
+    ut_assert_equal(occurences[1], "2|3", strcmp);
+    ut_assert_equal(occurences[2], "1|2", strcmp);
+    ut_assert_null(occurences[3]);
+
+    bst_destroy(&t);
 
     ut_test_case_fulfill();
 }
@@ -132,12 +140,15 @@ ut_status_t get_number_string_test_case()
     putchar('\n');
     #endif
 
-    ut_assert_true(bst_get_number_string(t) == 8, "");
+    ut_assert_true(bst_get_number_string(t) == 8);
 
     #ifdef DEBUG
     printf("number of words without repetition is: %zu\n", bst_get_number_string(t));
     putchar('\n');
     #endif
+
+    bst_destroy(&t);
+    fclose(hello_world);
 
     ut_test_case_fulfill();
 }
@@ -153,12 +164,15 @@ ut_status_t get_total_number_string_test_case()
     putchar('\n');
     #endif
 
-    ut_assert_true(bst_get_total_number_string(t) == 13, "");
+    ut_assert_true(bst_get_total_number_string(t) == 13);
 
     #ifdef DEBUG
     printf("number of words is: %zu\n", bst_get_total_number_string(t));
     putchar('\n');
     #endif
+
+    bst_destroy(&t);
+    fclose(hello_world);
 
     ut_test_case_fulfill();
 }
@@ -175,6 +189,8 @@ ut_status_t bst_get_average_depth_test_case()
     #endif
 
     printf("average depth: %f\n", bst_get_average_depth(t));
+
+    bst_destroy(&t);
 
     ut_test_case_fulfill();
 }

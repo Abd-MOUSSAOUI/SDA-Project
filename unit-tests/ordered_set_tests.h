@@ -8,13 +8,13 @@
 #include "unit_test.h"
 #include "ordered_set.h"
 
-#ifdef _cpluspluc
+#ifdef _cplusplus
 extern "C" {
 #endif
 
 void run_ordered_set_test_unit(void);
 
-#ifdef __cpluscplus
+#ifdef __cplusplus
 }
 #endif
 #endif

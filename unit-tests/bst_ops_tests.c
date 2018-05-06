@@ -9,14 +9,14 @@ ut_status_t bst_is_balanced_test_case()
 
     char *example = "foo qux baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
     bst_t *t = str_split(example);
-    ut_assert_true(bst_is_balanced(t), "Tree is balanced dosen't work correctly");
+    ut_assert_true(bst_is_balanced(t));
     #ifdef DEBUG
     print_ascii_tree(t);
     #endif
 
     example = "foo grault corge bar.\nfoo qux baz bar.\ncorge foo grault waldo.";
     t = str_split(example);
-    ut_assert_false(bst_is_balanced(t), "Tree is balanced dosen't work correctly");
+    ut_assert_false(bst_is_balanced(t));
     #ifdef DEBUG
     print_ascii_tree(t);
     #endif
@@ -34,7 +34,7 @@ ut_status_t bst_get_height_test_case()
     #ifdef DEBUG
     print_ascii_tree(t);
     #endif
-    ut_assert_true(bst_get_height(t) == 6, "bst height doesn't work");
+    ut_assert_true(bst_get_height(t) == 6);
 
     bst_destroy(&t);
     fclose(hello_world);
@@ -56,9 +56,9 @@ ut_status_t bst_rotate_left_test_case()
     #ifdef DEBUG
     print_ascii_tree(t);
     #endif
-    ut_assert_equal(t->word, "qux", strcmp, "");
-    ut_assert_equal(t->left_child->word, "foo", strcmp, "");
-    ut_assert_equal(t->right_child->word, "waldo", strcmp, "");
+    ut_assert_equal(t->word, "qux", strcmp);
+    ut_assert_equal(t->left_child->word, "foo", strcmp);
+    ut_assert_equal(t->right_child->word, "waldo", strcmp);
 
     bst_destroy(&t);
 
@@ -75,7 +75,7 @@ ut_status_t bst_balance_factor_test_case()
     print_ascii_tree(t);
     #endif
 
-    ut_assert_true(bst_balance_factor(t) == 0, "something wring with balance factor");
+    ut_assert_true(bst_balance_factor(t) == 0);
 
     t = str_split("qux foo baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.");
 
@@ -84,7 +84,7 @@ ut_status_t bst_balance_factor_test_case()
     print_ascii_tree(t);
     #endif
 
-    ut_assert_true(bst_balance_factor(t) == 2, "something wring with balance factor");
+    ut_assert_true(bst_balance_factor(t) == 2);
 
     bst_destroy(&t);
 
@@ -100,7 +100,7 @@ ut_status_t bst_rotate_right_test_case()
     #ifdef DEBUG
     print_ascii_tree(t);
     #endif
-    ut_assert_true(bst_balance_factor(t) == 2, "");
+    ut_assert_true(bst_balance_factor(t) == 2);
 
     t = bst_rotate_right(t);
 
@@ -108,7 +108,7 @@ ut_status_t bst_rotate_right_test_case()
     print_ascii_tree(t);
     #endif
 
-    ut_assert_true(bst_is_balanced(t), "");
+    ut_assert_true(bst_is_balanced(t));
 
     bst_destroy(&t);
 

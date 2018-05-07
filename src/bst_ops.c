@@ -107,32 +107,35 @@ bst_t *bst_right_left_rotate(bst_t *t)
 
 bst_t *bst_balance(bst_t *t) 
 {
-	if (t == NULL) return t;
 	bst_t *bst = NULL;
 
-	// /* Balance childrens, if they exist. */
-	// if (t->left_child)
-	// 	t->left_child = bst_balance(t->left_child);
-	// if (t->right_child) 
-	// 	t->right_child = bst_balance(t->right_child);
+	/* Balance our children, if they exist. */
+	if (t->left_child)
+		t->left_child = bst_balance(t->left_child);
+	if (t->right_child) 
+		t->right_child = bst_balance(t->right_child);
 
 	int bf = bst_balance_factor(t);
 
-	if( bf <= -2 ) 
+	if( bf >= 2 ) 
 	{
-		/* Left Heavy */	
-		if (bst_balance_factor(t->left_child) >= 1) 
-			bst = bst_right_left_rotate(t);
-		else 
-			bst = bst_rotate_left(t);
-	} 
-	else if (bf >= 2) 
-	{
-		/* Right Heavy */
-		if (bst_balance_factor(t->right_child) <= -1 )
-			bst = bst_left_right_rotate(t);
+		/* Left Heavy */
+		if (bst_balance_factor(t->left_child) < -1)
+			bst = bst_right_left_rotate(t->left_child);
+		else if (bst_balance_factor(t->left_child) > 1)
+			bst = bst_left_right_rotate(t->left_child);
 		else 
 			bst = bst_rotate_right(t);
+	} 
+	else if (bf <= -2) 
+	{
+		/* Right Heavy */	
+		if (bst_balance_factor(t->right_child) > 1) 
+			bst = bst_left_right_rotate(t->right_child);
+		else if (bst_balance_factor(t->right_child) < -1)
+			bst = bst_right_left_rotate(t->right_child);
+		else 
+			bst = bst_rotate_left(t);
 	} 
 	else 
 	{

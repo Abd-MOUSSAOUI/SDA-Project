@@ -92,11 +92,12 @@ bst_t *bst_right_left_rotate(bst_t *t)
 
     bst_t *x = t;
 	bst_t *y = x->right_child;
+	if (y->right_child == NULL) return t;
 	bst_t *z = y->left_child;
 	
     // Perform rotation
-	x->right_child = z->right_child;
-	y->left_child = z->left_child; 
+	x->right_child = z->left_child;
+	y->left_child = z->right_child;
 	z->right_child = y;
 	z->left_child = x;
 
@@ -104,38 +105,47 @@ bst_t *bst_right_left_rotate(bst_t *t)
 
 }
 
-bst_t *bst_balance(bst_t *t)
+bst_t *bst_balance_node( bst_t *t ) 
 {
-    if ((t == NULL) || bst_is_balanced(t)) return t;
+	if (t == NULL) return t;
+	bst_t *bst = NULL;
 
-	bst_t *tmp = NULL;
+	/* Balance our children, if they exist. */
+	if (t->left_child)
+		t->left_child = bst_balance_node(t->left_child);
+	if (t->right_child) 
+		t->right_child = bst_balance_node(t->right_child);
 
-	if(t->left_child)
-		t->left_child = bst_balance(t->left_child);
-	if(t->right_child) 
-		t->right_child = bst_balance(t->right_child);
-
-	int bf = bst_balance_factor(t->right_child);
+	int bf = bst_balance_factor(t);
 
 	if( bf >= 2 ) 
-    {
-		// Left	
-
-		if(bst_balance_factor(t->left_child) <= -1) 
-			tmp = bst_left_right_rotate(t);
+	{
+		/* Left Heavy */	
+		if (bst_balance_factor(t->left_child) <= -1) 
+			bst = bst_left_right_rotate(t);
 		else 
-			tmp = bst_rotate_left(t);
-
+			bst = bst_rotate_left(t);
 	} 
-    else if( bf <= -2 ) 
-    {
-		// Right
-
-		if(bst_balance_factor(t->right_child) >= 1)
-			tmp = bst_right_left_rotate(t);
+	else if (bf <= -2) 
+	{
+		/* Right Heavy */
+		if (bst_balance_factor(t->right_child) >= 1 )
+			bst = bst_right_left_rotate(t);
 		else 
-			tmp = bst_rotate_right(t);
-    }
+			bst = bst_rotate_right(t);
+	} 
+	else 
+	{
+		/* This t is balanced -- no change. */
+		bst = t;
+	}
+	return bst;	
+}
 
-	return tmp;	
+/* Balance a given tree */
+void bst_balance(bst_t *t) 
+{
+	bst_t *bst = NULL;
+	bst = bst_balance_node(t);
+	if(bst != t) t = bst; 
 }

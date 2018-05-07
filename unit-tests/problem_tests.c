@@ -44,6 +44,22 @@ ut_status_t balance_factor_test_case()
     ut_test_case_fulfill();
 }
 
+ut_status_t balance_test_case()
+{
+
+    int balance_factor = bst_balance_factor(tree);
+
+    print_ascii_tree(tree);
+
+    tree = bst_balance(tree);
+
+    print_ascii_tree(tree);
+
+    // ut_assert_true(bst_is_balanced(tree));
+
+    ut_test_case_fulfill();
+}
+
 void run_problem_test_unit()
 {
 
@@ -51,6 +67,7 @@ void run_problem_test_unit()
 
     ut_test_unit_new_case(&unit, "ANALYZE TEST", analyze_test_case);
     ut_test_unit_new_case(&unit, "BALANCE FACTOR TEST", balance_factor_test_case);
+    ut_test_unit_new_case(&unit, "BALANCING THE TREE TEST", balance_test_case);
 
     ut_test_unit_run(unit);
 

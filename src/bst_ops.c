@@ -95,8 +95,8 @@ bst_t *bst_right_left_rotate(bst_t *t)
 	bst_t *z = y->left_child;
 	
     // Perform rotation
-	x->right_child = z->left_child;
-	y->left_child = z->right_child; 
+	x->right_child = z->right_child;
+	y->left_child = z->left_child; 
 	z->right_child = y;
 	z->left_child = x;
 

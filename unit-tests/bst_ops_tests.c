@@ -103,10 +103,11 @@ ut_status_t bst_balance_factor_test_case()
 ut_status_t bst_rotate_right_test_case()
 {
 
-    char *example = "qux foo baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
-    bst_t *t = str_split(example);
+    FILE *hello_world = fopen("unit-tests/input/qux.txt", "r");
+    bst_t *t = fstr_split(hello_world);
     
     #ifdef DEBUG
+    printf("• Before: \n");
     print_ascii_tree(t);
     #endif
     ut_assert_true(bst_balance_factor(t) == 2);
@@ -114,6 +115,7 @@ ut_status_t bst_rotate_right_test_case()
     t = bst_rotate_right(t);
 
     #ifdef DEBUG
+    printf("• After: \n");
     print_ascii_tree(t);
     #endif
 
@@ -127,6 +129,24 @@ ut_status_t bst_rotate_right_test_case()
 ut_status_t bst_rotate_left_right_test_case()
 {
 
+    FILE *hello_world = fopen("unit-tests/input/qux.txt", "r");
+    bst_t *t = fstr_split(hello_world);
+    
+    #ifdef DEBUG
+    printf("• Before: \n");
+    print_ascii_tree(t);
+    #endif
+
+    t = bst_left_right_rotate(t);
+
+    #ifdef DEBUG
+    printf("• After: \n");
+    print_ascii_tree(t);
+    #endif
+
+    ut_test_case_fail("CHECK THIS");
+
+    bst_destroy(&t);
 
     ut_test_case_fulfill();
 }
@@ -134,6 +154,24 @@ ut_status_t bst_rotate_left_right_test_case()
 ut_status_t bst_rotate_right_left_test_case()
 {
 
+    FILE *hello_world = fopen("unit-tests/input/qux.txt", "r");
+    bst_t *t = fstr_split(hello_world);
+    
+    #ifdef DEBUG
+    printf("• Before: \n");
+    print_ascii_tree(t);
+    #endif
+
+    /* SEGFAULT */
+    // t = bst_right_left_rotate(t); 
+    ut_test_case_fail("SEGMENTATION FAULT");
+
+    #ifdef DEBUG
+    printf("• After: \n");
+    print_ascii_tree(t);
+    #endif
+
+    bst_destroy(&t);
 
     ut_test_case_fulfill();
 }
@@ -141,6 +179,24 @@ ut_status_t bst_rotate_right_left_test_case()
 ut_status_t bst_balance_test_case()
 {
 
+    FILE *hello_world = fopen("unit-tests/input/qux.txt", "r");
+    bst_t *t = fstr_split(hello_world);
+    
+    #ifdef DEBUG
+    printf("• Before: \n");
+    print_ascii_tree(t);
+    #endif
+
+    t = bst_balance(t);
+
+    ut_assert_true(bst_is_balanced(t) && t != NULL);
+
+    #ifdef DEBUG
+    printf("• After: \n");
+    print_ascii_tree(t);
+    #endif
+
+    bst_destroy(&t);
 
     ut_test_case_fulfill();
 }

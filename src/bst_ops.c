@@ -121,7 +121,7 @@ bst_t *bst_balance(bst_t *t)
 	if( bf <= -2 ) 
 	{
 		/* Left Heavy */	
-		if (bst_balance_factor(t->left_child) <= -1) 
+		if (bst_balance_factor(t->left_child) >= 1) 
 			bst = bst_left_right_rotate(t);
 		else 
 			bst = bst_rotate_left(t);
@@ -129,7 +129,7 @@ bst_t *bst_balance(bst_t *t)
 	else if (bf >= 2) 
 	{
 		/* Right Heavy */
-		if (bst_balance_factor(t->right_child) >= 1 )
+		if (bst_balance_factor(t->right_child) <= -1 )
 			bst = bst_right_left_rotate(t);
 		else 
 			bst = bst_rotate_right(t);

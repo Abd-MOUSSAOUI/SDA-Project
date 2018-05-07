@@ -187,7 +187,7 @@ ut_status_t bst_balance_test_case()
     print_ascii_tree(t);
     #endif
 
-    t = bst_balance(t);
+    bst_balance(t);
 
     #ifdef DEBUG
     printf("• After: \n");

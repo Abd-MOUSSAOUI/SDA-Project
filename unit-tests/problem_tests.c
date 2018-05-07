@@ -31,12 +31,15 @@ ut_status_t balance_factor_test_case()
     int balance_factor = bst_balance_factor(tree);
 
     #ifdef DEBUG
-    printf("Root's balance factor: %d\n", balance_factor);
-    printf("Left child's balance factor: %d\n", bst_balance_factor(tree->left_child));
-    printf("Right child's balance factor: %d\n", bst_balance_factor(tree->right_child));
+    printf("• This tree is balanced? %s\n", bst_is_balanced(tree) ? "YES" : "HELL NO!");
+    printf("• Root's balance factor: %d\n", balance_factor);
+    printf("• Left child's balance factor: %d\n", bst_balance_factor(tree->left_child));
+    printf("• Right child's balance factor: %d\n", bst_balance_factor(tree->right_child));
     #endif  
 
-    ut_assert_true(balance_factor == balance_factor);
+    ut_assert_true(balance_factor == 2);
+    ut_assert_true(bst_balance_factor(tree->left_child) == -7);
+    ut_assert_true(bst_balance_factor(tree->right_child) == -6);
 
     ut_test_case_fulfill();
 }

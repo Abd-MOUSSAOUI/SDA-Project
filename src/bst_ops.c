@@ -105,15 +105,15 @@ bst_t *bst_right_left_rotate(bst_t *t)
 
 }
 
-bst_t *bst_balance(bst_t *t) 
+bst_t *bst_balance_node(bst_t *t) 
 {
 	bst_t *bst = NULL;
 
 	/* Balance our children, if they exist. */
 	if (t->left_child)
-		t->left_child = bst_balance(t->left_child);
+		t->left_child = bst_balance_node(t->left_child);
 	if (t->right_child) 
-		t->right_child = bst_balance(t->right_child);
+		t->right_child = bst_balance_node(t->right_child);
 
 	int bf = bst_balance_factor(t);
 
@@ -134,7 +134,7 @@ bst_t *bst_balance(bst_t *t)
 			bst = bst_left_right_rotate(t->right_child);
 		else if (bst_balance_factor(t->right_child) < -1)
 			bst = bst_right_left_rotate(t->right_child);
-		else 
+		else
 			bst = bst_rotate_left(t);
 	} 
 	else 
@@ -143,4 +143,12 @@ bst_t *bst_balance(bst_t *t)
 		bst = t;
 	}
 	return bst;	
+}
+
+bst_t *bst_balance(bst_t *t)
+{
+	bst_t *tmp = t;
+	while (!bst_is_balanced(tmp))
+		tmp = bst_balance_node(tmp);
+	return tmp;
 }

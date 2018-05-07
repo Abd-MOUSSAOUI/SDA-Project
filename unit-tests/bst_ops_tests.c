@@ -129,7 +129,7 @@ ut_status_t bst_rotate_right_test_case()
 ut_status_t bst_rotate_left_right_test_case()
 {
 
-    const char *test = "grault corge baz qux.\nfoo dogga baz.\nfoo grault fwldo";
+    const char *test = "grault corge baz qux.\nfoo dogga baz.\nfoo grault fwldo.";
     bst_t *t = str_split(test);
     
     #ifdef DEBUG
@@ -154,7 +154,7 @@ ut_status_t bst_rotate_left_right_test_case()
 ut_status_t bst_rotate_right_left_test_case()
 {
 
-    const char *test = "corge baz qux.\nfoo dogga grault baz.\nfoo grault waldo";
+    const char *test = "corge baz qux.\nfoo dogga grault baz.\nfoo grault waldo.";
     bst_t *t = str_split(test);
     
     #ifdef DEBUG

@@ -8,6 +8,7 @@
 #include "string_analyzer_tests.h"
 #include "bst_tests.h"
 #include "bst_ops_tests.h"
+#include "problem_tests.h"
 
 #define BST_TEST "bst"
 #define ORDERED_SET_TEST "ordset"
@@ -47,16 +48,11 @@ void run_test_units(int argc, char *argv[])
     }
 }
 
-void run_problem_units()
-{
-    printf("PROBLEM TEST UNIT\n");
-}
-
 int main(int argc, char *argv[])
 {
 
     if (argc == 1)
-        run_problem_units();
+        run_problem_test_unit();
     else
         run_test_units(argc, argv);
 

@@ -236,7 +236,7 @@ void run_bst_test_unit()
     ut_test_unit_new_case(&unit, "Binary Search Tree to string test case", bst_to_list_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree find test case", bst_find_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree find occurences test case", bst_find_occurences_test_case);
-    ut_test_unit_new_case(&unit, "Binary Search Tree find occurences test case", bst_get_average_depth_test_case);
+    ut_test_unit_new_case(&unit, "Binary Search Tree get average depth test case", bst_get_average_depth_test_case);
 
     ut_test_unit_run(unit);
 }

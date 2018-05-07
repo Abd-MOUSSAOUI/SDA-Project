@@ -19,7 +19,7 @@ bst_t *str_split(const char *str)
     {
         while ((word = strtok_r(line, DELIMITERS, &line)) != NULL)
         {
-            strlow(word);
+            // strlow(word);
             tree = bst_insert(tree, word, line_index);
         }
         line_index++;
@@ -37,7 +37,7 @@ bst_t *fstr_split(FILE *fstream)
         word = strtok(line, DELIMITERS);
         while (word != NULL)
         {
-            strlow(word);
+            // strlow(word);
             tree = bst_insert(tree, word, line_index);
             word = strtok(NULL, DELIMITERS);
         }

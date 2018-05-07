@@ -129,8 +129,8 @@ ut_status_t bst_rotate_right_test_case()
 ut_status_t bst_rotate_left_right_test_case()
 {
 
-    FILE *hello_world = fopen("unit-tests/input/qux.txt", "r");
-    bst_t *t = fstr_split(hello_world);
+    const char *test = "grault corge baz qux.\nfoo dogga baz.\nfoo grault fwldo";
+    bst_t *t = str_split(test);
     
     #ifdef DEBUG
     printf("• Before: \n");
@@ -144,6 +144,8 @@ ut_status_t bst_rotate_left_right_test_case()
     print_ascii_tree(t);
     #endif
 
+    ut_assert_true(bst_is_balanced(t));
+
     bst_destroy(&t);
 
     ut_test_case_fulfill();
@@ -152,8 +154,8 @@ ut_status_t bst_rotate_left_right_test_case()
 ut_status_t bst_rotate_right_left_test_case()
 {
 
-    FILE *hello_world = fopen("unit-tests/input/qux.txt", "r");
-    bst_t *t = fstr_split(hello_world);
+    const char *test = "corge baz qux.\nfoo dogga grault baz.\nfoo grault waldo";
+    bst_t *t = str_split(test);
     
     #ifdef DEBUG
     printf("• Before: \n");
@@ -166,6 +168,8 @@ ut_status_t bst_rotate_right_left_test_case()
     printf("• After: \n");
     print_ascii_tree(t);
     #endif
+
+    ut_assert_true(bst_is_balanced(t));
 
     bst_destroy(&t);
 

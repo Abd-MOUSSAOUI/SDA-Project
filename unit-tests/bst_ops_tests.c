@@ -144,8 +144,6 @@ ut_status_t bst_rotate_left_right_test_case()
     print_ascii_tree(t);
     #endif
 
-    // ut_test_case_fail("CHECK THIS");
-
     bst_destroy(&t);
 
     ut_test_case_fulfill();
@@ -162,9 +160,7 @@ ut_status_t bst_rotate_right_left_test_case()
     print_ascii_tree(t);
     #endif
 
-    /* SEGFAULT */
-    // t = bst_right_left_rotate(t); 
-    ut_test_case_fail("SEGMENTATION FAULT");
+    t = bst_right_left_rotate(t); 
 
     #ifdef DEBUG
     printf("• After: \n");
@@ -189,12 +185,12 @@ ut_status_t bst_balance_test_case()
 
     t = bst_balance(t);
 
-    ut_assert_true(bst_is_balanced(t) && t != NULL);
-
     #ifdef DEBUG
     printf("• After: \n");
     print_ascii_tree(t);
     #endif
+
+    ut_assert_true(bst_is_balanced(t) && t != NULL);
 
     bst_destroy(&t);
 

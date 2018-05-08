@@ -19,7 +19,6 @@ bool bst_is_balanced(bst_t *t)
    return false;
 }
 
-
 int bst_get_height(bst_t *t)
 {
     int lh=0, rh=0;
@@ -140,7 +139,7 @@ bst_t *bst_balance_node(bst_t *t)
 	else 
 	{
 		/* This t is balanced -- no change. */
-		bst = t;
+		return t;
 	}
 	return bst;	
 }

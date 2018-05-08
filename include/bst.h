@@ -18,7 +18,7 @@ typedef struct bst_s
 } bst_t;
 
 typedef enum { INORDER, PREORDER, POSTORDER } bst_traversal;
-typedef void (*forerach_node)(const bst_t *node, void *arg);
+typedef void (*process_node_f)(const bst_t *node, void *arg);
 
 bst_t *bst_init(void);
 bst_t *bst_create(const char *word, const ordered_set_t *positions);
@@ -31,6 +31,6 @@ ordered_set_t *bst_find(const bst_t *bst, const char *word);
 ordered_set_t *bst_find_cooccurences(const bst_t *bst, const char **words, size_t wordc);
 int bst_cmp(const bst_t *lhs, const bst_t *rhs);
 char **bst_to_list(const bst_t *bst);
-void bst_traverse(bst_t *bst, bst_traversal traversal, forerach_node process, void *arg);
+void bst_traverse(bst_t *bst, bst_traversal traversal, process_node_f process, void *arg);
 
 #endif

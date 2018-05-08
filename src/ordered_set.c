@@ -133,13 +133,17 @@ ordered_set_t *ordered_set_intersect(const ordered_set_t **sets, size_t setc)
         return ordered_set_create();
 
     ordered_set_t *intersection = ordered_set_create();
-    const ordered_set_t *first = *sets;
+    const ordered_set_t *little = *sets;
 
-    index_t vali;
+    index_t vali, seti;
 
-    for (vali = 0; vali < first->count; vali++)
+    for (seti = 1; seti < setc; seti++)
+        if (sets[seti]->count < little->count)
+            little = sets[seti];
+
+    for (vali = 0; vali < little->count; vali++)
     {
-        index_t val = first->values[vali];
+        index_t val = little->values[vali];
         if (_ordered_set_group_contain((sets + 1), setc - 1, val))
             ordered_set_insert(intersection, val);
     }

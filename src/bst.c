@@ -133,7 +133,7 @@ int bst_cmp(const bst_t *lhs, const bst_t *rhs)
     else return 1;
 }
 
-void bst_traverse(bst_t *bst, bst_traversal traversal, forerach_node process, void *arg)
+void bst_traverse(bst_t *bst, bst_traversal traversal, process_node_f process, void *arg)
 {
     if (bst == NULL) return;
     switch (traversal)

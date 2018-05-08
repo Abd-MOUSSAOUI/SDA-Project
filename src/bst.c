@@ -115,13 +115,11 @@ ordered_set_t *bst_find(const bst_t *bst, const char *word)
 ordered_set_t *bst_find_cooccurences(const bst_t *bst, const char **words, 
                                           size_t wordc)
 {
-    const ordered_set_t *position_sets[wordc], *intersection;
+    ordered_set_t *intersection;
+    const ordered_set_t **position_sets = salloc(NULL, wordc * sizeof(const ordered_set_t *));
     unsigned i;
     for (i = 0; i < wordc; i++)
-    {
         position_sets[i] = bst_find(bst, words[i]);
-        ordered_set_print(position_sets[i]);
-    }
     return ordered_set_intersect(position_sets, wordc);
 }
 

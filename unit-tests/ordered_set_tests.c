@@ -60,9 +60,11 @@ ut_status_t ordered_set_contains_test_case()
     ordered_set_print(test_set);
     #endif
 
+    #ifdef DEBUG
     index_t ind;
     for (ind = 1; ind < 128; ind *= 8)
         printf("• Does it contain %lu? %s\n", ind, ordered_set_contains(test_set, ind) ? "YES" : "NO");
+    #endif
 
     ut_assert_true(ordered_set_contains(test_set, 9));
     ut_assert_true(ordered_set_contains(test_set, 25));

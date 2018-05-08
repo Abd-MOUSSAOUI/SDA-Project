@@ -136,11 +136,11 @@ ut_status_t bst_find_cooccurences_test_case()
     putchar('\n');
     #endif
 
-    const char *words[] = {"foo", "grault", "bar", "non-existant"};
-    ordered_set_t *coocurences = bst_find_cooccurences(t, words, 4);
+    const char *words[] = {"foo", "qux", "bar"};
+    ordered_set_t *coocurences = bst_find_cooccurences(t, words, 3);
 
     #ifdef DEBUG
-    printf("• Returned positions for words 'foo', 'grault', 'bar', 'non-existant':\n %s", 
+    printf("• Returned positions for words 'foo', 'qux', 'bar': %s\n", 
             ordered_set_to_string(coocurences));
     #endif
 

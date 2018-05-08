@@ -25,11 +25,6 @@ ut_status_t analyze_test_case()
     ut_test_case_fulfill();
 }
 
-void print_node_balance(const bst_t *node, void *arg)
-{
-    printf("%s : %d\n", node->word, bst_balance_factor((bst_t *)node));
-}
-
 ut_status_t balance_factor_test_case()
 {
 
@@ -37,7 +32,6 @@ ut_status_t balance_factor_test_case()
 
     #ifdef DEBUG
     printf("• This tree is balanced? %s\n", bst_is_balanced(tree) ? "YES" : "HELL NO!");
-    bst_traverse(tree, INORDER, print_node_balance, NULL);
     #endif  
 
     ut_test_case_fulfill();

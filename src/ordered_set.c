@@ -89,9 +89,13 @@ int ordered_set_contains(const ordered_set_t *set, index_t value)
         {
             index_t mid = (i + j) / 2;
             if (set->values[mid] > value)
+            {
+                if (mid == 0)
+                    return 0;
                 j = mid - 1;
+            }
             else if (set->values[mid] < value)
-                i = mid + 1;
+                i = mid + 1; 
             else 
                 return 1;
         }
@@ -189,7 +193,7 @@ char *ordered_set_to_string(const ordered_set_t *set)
     {
         sprintf((str + i), "%lu", set->values[index]);
         i += digits_count(set->values[index]);
-        if (index != set->count - 1 && index != 0) 
+        if (index != set->count - 1) 
         {
             sprintf((str + i), ", ");
             i += 2;

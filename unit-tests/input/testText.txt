@@ -1,0 +1,2 @@
+Pour résoudre ce problème, nous allons implémenter un dictionnaire de mots sous la forme d'un arbre
+binaire de recherche. Cet arbre binaire de recherche contient l'intégralité des mots du texte parcouru

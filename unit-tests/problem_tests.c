@@ -7,7 +7,7 @@ bst_t *tree;
 ut_status_t analyze_test_case()
 {
 
-    FILE *experimentation_file = fopen("unit-tests/input/CMI-HPC.txt", "r");
+    FILE *experimentation_file = fopen("unit-tests/input/testText.txt", "r");
     tree = fstr_split(experimentation_file);
 
     #ifdef DEBUG
@@ -15,12 +15,12 @@ ut_status_t analyze_test_case()
     print_ascii_tree(tree);
     #endif
 
-    ut_assert_equal(tree->word, "le", strcmp);
-    ut_assert_equal(tree->left_child->word, "cmi", strcmp);
-    ut_assert_equal(tree->left_child->left_child->word, "besoin", strcmp);
-    ut_assert_equal(tree->left_child->right_child->word, "cursus", strcmp);
-    ut_assert_equal(tree->right_child->word, "master", strcmp);
-    ut_assert_equal(tree->right_child->right_child->word, "réseau", strcmp);
+    ut_assert_equal(tree->word, "pour", strcmp);
+    ut_assert_equal(tree->left_child->word, "ce", strcmp);
+    ut_assert_equal(tree->left_child->left_child->word, "allons", strcmp);
+    ut_assert_equal(tree->left_child->right_child->word, "nous", strcmp);
+    ut_assert_equal(tree->right_child->word, "résoudre", strcmp);
+    ut_assert_equal(tree->right_child->right_child->word, "un", strcmp);
 
     ut_test_case_fulfill();
 }

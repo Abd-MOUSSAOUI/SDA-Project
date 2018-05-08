@@ -116,38 +116,36 @@ bst_t *bst_balance_node(bst_t *t)
 
 	int bf = bst_balance_factor(t);
 
-	if( bf >= 2 ) 
+	if( bf > 1 ) 
 	{
 		/* Left Heavy */
-		if (bst_balance_factor(t->left_child) < -1)
-			bst = bst_right_left_rotate(t->left_child);
-		else if (bst_balance_factor(t->left_child) > 1)
-			bst = bst_left_right_rotate(t->left_child);
-		else 
+		if (bst_balance_factor(t->left_child) < 0)
+			bst = bst_left_right_rotate(t);
+		else
 			bst = bst_rotate_right(t);
 	} 
-	else if (bf <= -2) 
+	else if (bf < -1) 
 	{
 		/* Right Heavy */	
-		if (bst_balance_factor(t->right_child) > 1) 
-			bst = bst_left_right_rotate(t->right_child);
-		else if (bst_balance_factor(t->right_child) < -1)
-			bst = bst_right_left_rotate(t->right_child);
+		if (bst_balance_factor(t->right_child) > 0) 
+			bst = bst_right_left_rotate(t);
 		else
 			bst = bst_rotate_left(t);
 	} 
 	else 
 	{
 		/* This t is balanced -- no change. */
-		return t;
+		bst = t;
 	}
 	return bst;	
 }
 
 bst_t *bst_balance(bst_t *t)
 {
-	bst_t *tmp = t;
+	bst_t *tmp = bst_balance_node(t);
+
 	while (!bst_is_balanced(tmp))
 		tmp = bst_balance_node(tmp);
+
 	return tmp;
 }

@@ -101,31 +101,31 @@ ut_status_t bst_find_test_case()
     putchar('\n');
     #endif
 
-    char *found_word = bst_find(t, "foo");
+    ordered_set_t *found = bst_find(t, "foo");
 
     #ifdef DEBUG
     printf("• Occurences of the word 'foo': \n");
-    printf("%s\n", found_word != NULL ? found_word : "NULL");
+    printf("%s\n", ordered_set_to_string(found));
     putchar('\n');
     #endif
 
-    char *not_found_word = bst_find(t, "abdou");
+    ordered_set_t *not_found = bst_find(t, "abdou");
 
     #ifdef DEBUG
     printf("• Occurences of the word 'abdou': \n");
-    printf("%s\n", not_found_word != NULL ? not_found_word : "NULL");
+    printf("%s\n", ordered_set_to_string(not_found));
     putchar('\n');
     #endif
 
-    ut_assert_not_null(found_word);
-    ut_assert_null(not_found_word);
+    ut_assert_true(ordered_set_is_empty(not_found));
+    ut_assert_false(ordered_set_is_empty(found));
 
     bst_destroy(&t);
 
     ut_test_case_fulfill();
 }
 
-ut_status_t bst_find_occurences_test_case()
+ut_status_t bst_find_cooccurences_test_case()
 {
     char *example = "foo qux baz bar.\nfoo grault corge bar.\ncorge foo grault waldo.";
     bst_t *t = str_split(example);
@@ -137,20 +137,15 @@ ut_status_t bst_find_occurences_test_case()
     #endif
 
     const char *words[] = {"foo", "grault", "bar", "non-existant"};
-    char **occurences = bst_find_occurence_indexes(t, words, 4);
+    ordered_set_t *coocurences = bst_find_cooccurences(t, words, 4);
 
     #ifdef DEBUG
-    printf("• Returned positions for some examples of words:\n");
-    printf("foo: %s\ngrault: %s\nbar: %s\nnon-exsitant: NULL", occurences[0], 
-                                occurences[1], occurences[2]);
+    printf("• Returned positions for words 'foo', 'grault', 'bar', 'non-existant':\n %s", 
+            ordered_set_to_string(coocurences));
     #endif
 
-    ut_assert_equal(occurences[0], "1|2|3", strcmp);
-    ut_assert_equal(occurences[1], "2|3", strcmp);
-    ut_assert_equal(occurences[2], "1|2", strcmp);
-    ut_assert_null(occurences[3]);
-
     bst_destroy(&t);
+    ordered_set_destroy(&coocurences);
 
     ut_test_case_fulfill();
 }
@@ -235,7 +230,7 @@ void run_bst_test_unit()
     ut_test_unit_new_case(&unit, "Binary Search Tree traversal test case", bst_traversal_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree to string test case", bst_to_list_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree find test case", bst_find_test_case);
-    ut_test_unit_new_case(&unit, "Binary Search Tree find occurences test case", bst_find_occurences_test_case);
+    ut_test_unit_new_case(&unit, "Binary Search Tree find occurences test case", bst_find_cooccurences_test_case);
     ut_test_unit_new_case(&unit, "Binary Search Tree get average depth test case", bst_get_average_depth_test_case);
 
     ut_test_unit_run(unit);

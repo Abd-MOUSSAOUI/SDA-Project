@@ -99,26 +99,27 @@ bst_t *bst_insert(bst_t *bst, const char *word, index_t pos)
     return bst;
 }
 
-char *bst_find(const bst_t *bst, const char *word)
+ordered_set_t *bst_find(const bst_t *bst, const char *word)
 {
     if (bst == NULL) 
-        return NULL;
+        return ordered_set_create();
     else if (strcmp(bst->word, word) == 0) 
-        return ordered_set_to_string(bst->positions);
+        return bst->positions;
     else
     {
-        char *found = bst_find(bst->left_child, word);
-        return found != NULL ? found : bst_find(bst->right_child, word);
+        ordered_set_t *found = bst_find(bst->left_child, word);
+        return !ordered_set_is_empty(found) ? found : bst_find(bst->right_child, word);
     }
 }
 
-char **bst_find_occurence_indexes(const bst_t *bst, const char **word, size_t count)
+ordered_set_t *bst_find_cooccurences(const bst_t *bst, const char **words, 
+                                          size_t wordc)
 {
-    int j = 0;
-    char **occurences = salloc(NULL, (count) * sizeof(char *));
-    for (j = 0; j < count; j++)
-        occurences[j] = bst_find(bst, word[j]);
-    return occurences;
+    ordered_set_t *position_sets[wordc];
+    unsigned i;
+    for (i = 0; i < wordc; i++)
+        position_sets[i] = bst_find(bst, words[i]);
+    return ordered_set_intersect((const ordered_set_t **)position_sets, wordc);
 }
 
 int bst_cmp(const bst_t *lhs, const bst_t *rhs)

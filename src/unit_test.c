@@ -45,6 +45,9 @@ ut_test_unit_t ut_test_unit_create(const char *desc)
 
 ut_status_t ut_test_case_run(ut_test_case_t test_case)
 {
+    #ifdef DEBUG
+    printf("\033[34m\n→  %s\n\n\033[0m", test_case.desc);
+    #endif
     ut_status_t status = test_case.test_code();
     if (status == UT_SUCCESS)
         printf("\033[32m\n\u2713  %s\n\n\033[0m", test_case.desc);

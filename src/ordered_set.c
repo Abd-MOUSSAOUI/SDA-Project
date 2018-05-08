@@ -21,6 +21,11 @@ ordered_set_t *ordered_set_init(const index_t *values, size_t count)
     return set;
 }
 
+int ordered_set_is_empty(const ordered_set_t *set)
+{
+    return set->count == 0;
+}
+
 void ordered_set_destroy(ordered_set_t **set)
 {
     free((*set)->values);
@@ -77,8 +82,7 @@ void ordered_set_insert(ordered_set_t *set, index_t value)
 
 int ordered_set_contains(const ordered_set_t *set, index_t value)
 {
-    index_t index = 0;
-    if (set->count != 0)
+    if (!ordered_set_is_empty(set))
     {  
         index_t i = 0, j = set->count - 1;
         while(i <= j)
@@ -91,7 +95,6 @@ int ordered_set_contains(const ordered_set_t *set, index_t value)
             else 
                 return 1;
         }
-        index = i;
     }
     return 0;
 }
@@ -109,7 +112,7 @@ void ordered_set_print(const ordered_set_t *set)
     putchar('\n');
 }
 
-ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc)
+ordered_set_t *ordered_set_intersect(const ordered_set_t **sets, size_t setc)
 {
     index_t index;
     ordered_set_t *st_set = (ordered_set_t *)sets[0], *intersection = ordered_set_create();
@@ -117,8 +120,10 @@ ordered_set_t *ordered_set_intersect(ordered_set_t * const *sets, size_t setc)
     {
         index_t set_index, value = st_set->values[index];
         for (set_index = 1; set_index < setc; set_index++)
+        {
             if (ordered_set_contains(sets[set_index], value))
                 ordered_set_insert(intersection, value);
+        }
     }
     return intersection;
 }
@@ -162,6 +167,8 @@ unsigned short int digits_count(index_t i)
 
 char *ordered_set_to_string(const ordered_set_t *set)
 {
+    if (ordered_set_is_empty(set))
+        return "(empty)";
     char *str = malloc(ORDERED_SET_STR_MAX);
     index_t index, i = 0;
     for (index = 0; index < set->count; index++)

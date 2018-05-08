@@ -25,6 +25,11 @@ ut_status_t analyze_test_case()
     ut_test_case_fulfill();
 }
 
+void print_node_balance(const bst_t *node, void *arg)
+{
+    printf("%s : %d\n", node->word, bst_balance_factor((bst_t *)node));
+}
+
 ut_status_t balance_factor_test_case()
 {
 
@@ -32,14 +37,8 @@ ut_status_t balance_factor_test_case()
 
     #ifdef DEBUG
     printf("• This tree is balanced? %s\n", bst_is_balanced(tree) ? "YES" : "HELL NO!");
-    printf("• Root's balance factor: %d\n", balance_factor);
-    printf("• Left child's balance factor: %d\n", bst_balance_factor(tree->left_child));
-    printf("• Right child's balance factor: %d\n", bst_balance_factor(tree->right_child));
+    bst_traverse(tree, INORDER, print_node_balance, NULL);
     #endif  
-
-    ut_assert_true(balance_factor == 2);
-    ut_assert_true(bst_balance_factor(tree->left_child) == -7);
-    ut_assert_true(bst_balance_factor(tree->right_child) == -6);
 
     ut_test_case_fulfill();
 }
@@ -49,13 +48,12 @@ ut_status_t balance_test_case()
 
     int balance_factor = bst_balance_factor(tree);
 
-    print_ascii_tree(tree);
-
     tree = bst_balance(tree);
 
+    printf("• After:\n");
     print_ascii_tree(tree);
 
-    // ut_assert_true(bst_is_balanced(tree));
+    ut_assert_true(bst_is_balanced(tree));
 
     ut_test_case_fulfill();
 }
@@ -68,6 +66,7 @@ void run_problem_test_unit()
     ut_test_unit_new_case(&unit, "ANALYZE TEST", analyze_test_case);
     ut_test_unit_new_case(&unit, "BALANCE FACTOR TEST", balance_factor_test_case);
     ut_test_unit_new_case(&unit, "BALANCING THE TREE TEST", balance_test_case);
+    ut_test_unit_new_case(&unit, "BALANCE FACTOR TEST", balance_factor_test_case);
 
     ut_test_unit_run(unit);
 

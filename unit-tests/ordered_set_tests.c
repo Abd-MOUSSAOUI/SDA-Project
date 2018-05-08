@@ -80,29 +80,37 @@ ut_status_t ordered_set_intersect_test_case()
     index_t lhsvals[10] = {0, 1, 4, 9, 25, 36, 49, 64, 81, 100};
     ordered_set_t *lhsset = ordered_set_init(lhsvals, 10);
 
+    index_t midvals[7] = {0, 12, 44, 81, 16, 64, 100};
+    ordered_set_t *midset = ordered_set_init(midvals, 7);
+
     index_t rhsvals[10] = {0, 1, 4, 9, 16, 64, 100, 121, 144, 269};
     ordered_set_t *rhsset = ordered_set_init(rhsvals, 10);
 
     #ifdef DEBUG
     printf("• LHS: \n");
     ordered_set_print(lhsset);
+    printf("• MID: \n");
+    ordered_set_print(midset);
     printf("• RHS: \n");
     ordered_set_print(rhsset);
     #endif
 
-    ordered_set_t *inter = ordered_set_intersect((const ordered_set_t *[2]){lhsset, rhsset}, 2);
+    const ordered_set_t *sets[] = {lhsset, rhsset, midset};
+
+    ordered_set_t *inter = ordered_set_intersect(sets, 3);
 
     #ifdef DEBUG
     printf("• Intersection: \n");
     ordered_set_print(inter);
     #endif
 
-    index_t intervals[] = {0, 1, 4, 9, 64, 100};
-    ordered_set_t *right_inter = ordered_set_init(intervals, 6);
+    index_t intervals[] = {0, 100};
+    ordered_set_t *right_inter = ordered_set_init(intervals, 2);
 
     ut_assert_equal(inter, right_inter, ordered_set_cmp);
 
     ordered_set_destroy(&lhsset);
+    ordered_set_destroy(&midset);
     ordered_set_destroy(&rhsset);
     ordered_set_destroy(&inter);
     ordered_set_destroy(&right_inter);

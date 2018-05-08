@@ -115,11 +115,14 @@ ordered_set_t *bst_find(const bst_t *bst, const char *word)
 ordered_set_t *bst_find_cooccurences(const bst_t *bst, const char **words, 
                                           size_t wordc)
 {
-    ordered_set_t *position_sets[wordc];
+    const ordered_set_t *position_sets[wordc], *intersection;
     unsigned i;
     for (i = 0; i < wordc; i++)
+    {
         position_sets[i] = bst_find(bst, words[i]);
-    return ordered_set_intersect((const ordered_set_t **)position_sets, wordc);
+        ordered_set_print(position_sets[i]);
+    }
+    return ordered_set_intersect(position_sets, wordc);
 }
 
 int bst_cmp(const bst_t *lhs, const bst_t *rhs)

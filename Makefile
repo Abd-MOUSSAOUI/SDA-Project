@@ -28,8 +28,8 @@ $(OBJDIR)%.o:
 tests: $(OBJS) $(TEST_OBJS)
 	@rm -rf $(PROG) tests tests.dSYM
 	$(CC) -o tests -g $(IFLAG) $(OBJS) $(TEST_OBJS) $(DEFINES)
-	@./tests $(TEST_ARGS)
-	@rm tests
+	# @./tests $(TEST_ARGS)
+	# @rm tests
 
 $(TESTDIR)%.o:
 	$(CC) -c $(WFLAGS) $(TESTDIR)%.c $(DEFINES)

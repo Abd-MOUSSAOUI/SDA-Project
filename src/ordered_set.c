@@ -112,18 +112,32 @@ void ordered_set_print(const ordered_set_t *set)
     putchar('\n');
 }
 
+int _ordered_set_group_contain(const ordered_set_t **sets, size_t setc, index_t val)
+{
+    index_t seti;
+    for (seti = 0; seti < setc; seti++)
+    {
+        if (!ordered_set_contains(sets[seti], val))
+            return 0;
+    }
+    return 1;
+}
+
 ordered_set_t *ordered_set_intersect(const ordered_set_t **sets, size_t setc)
 {
-    index_t index;
-    ordered_set_t *st_set = (ordered_set_t *)sets[0], *intersection = ordered_set_create();
-    for (index = 0; index < st_set->count; index++)
+    if (sets == NULL || setc == 0)
+        return ordered_set_create();
+
+    ordered_set_t *intersection = ordered_set_create();
+    const ordered_set_t *first = *sets;
+
+    index_t vali;
+
+    for (vali = 0; vali < first->count; vali++)
     {
-        index_t set_index, value = st_set->values[index];
-        for (set_index = 1; set_index < setc; set_index++)
-        {
-            if (ordered_set_contains(sets[set_index], value))
-                ordered_set_insert(intersection, value);
-        }
+        index_t val = first->values[vali];
+        if (_ordered_set_group_contain((sets + 1), setc - 1, val))
+            ordered_set_insert(intersection, val);
     }
     return intersection;
 }
@@ -149,7 +163,6 @@ int ordered_set_cmp(const ordered_set_t *lhs, const ordered_set_t *rhs)
     for (index = 0; index < lhs->count; index++)
         if (lhs->values[index] != rhs->values[index])
             return 1;
-
     return 0;
 }
 
@@ -170,17 +183,19 @@ char *ordered_set_to_string(const ordered_set_t *set)
     if (ordered_set_is_empty(set))
         return "(empty)";
     char *str = malloc(ORDERED_SET_STR_MAX);
-    index_t index, i = 0;
+    index_t index, i = 1;
+    sprintf(str, "(");
     for (index = 0; index < set->count; index++)
     {
         sprintf((str + i), "%lu", set->values[index]);
         i += digits_count(set->values[index]);
-        if (index != set->count - 1) 
+        if (index != set->count - 1 && index != 0) 
         {
-            sprintf((str + i), "|");
-            i++;
+            sprintf((str + i), ", ");
+            i += 2;
         }
     }
+    sprintf(str + (i++), ")");
     str[i] = 0;
     return str;
 }
